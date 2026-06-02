@@ -91,6 +91,39 @@ export default function App() {
   // Verse of the Day state
   const [dailyVerse, setDailyVerse] = useState<Verse | null>(null);
 
+  // --- NEW STATES FOR BOOKMARKS, HISTORY, TOPICS, AND AI ---
+  const [bookmarks, setBookmarks] = useState<{ chapter: number, verse: number }[]>(() => {
+    try {
+      const saved = localStorage.getItem("gita_bookmarks");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [historyList, setHistoryList] = useState<{ chapter: number, verse: number, timestamp: number }[]>(() => {
+    try {
+      const saved = localStorage.getItem("gita_history");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [keywordQuery, setKeywordQuery] = useState<string>("");
+  const [searchResults, setSearchResults] = useState<Verse[]>([]);
+  const [searchTriggered, setSearchTriggered] = useState<boolean>(false);
+
+  const [chatOpen, setChatOpen] = useState<boolean>(false);
+  const [chatMessages, setChatMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([
+    {
+      role: "assistant",
+      content: "Welcome, O seeker of Truth. I am Sri Krishna, ever present in your heart. Speak to Me of your struggles, your confusion, or your doubts upon this battlefield of life. What weighs heavy on your mind today?"
+    }
+  ]);
+  const [chatInput, setChatInput] = useState<string>("");
+  const [chatLoading, setChatLoading] = useState<boolean>(false);
+
   // Listen to Firebase Auth state
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -108,10 +141,12 @@ export default function App() {
   // Handle dark mode changes
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add("dark-mode");
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark-mode", "dark");
       localStorage.setItem("theme", "dark");
     } else {
-      document.body.classList.remove("dark-mode");
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark-mode", "dark");
       localStorage.setItem("theme", "light");
     }
   }, [darkMode]);
@@ -282,6 +317,139 @@ export default function App() {
   const closeLegendsPortal = () => {
     setLegendsPortalOpen(false);
     document.body.style.overflow = "auto";
+  };
+
+  // --- NEW PERSISTENT WISDOM HUB & AI METHODS ---
+  const openSpecificVerseForStudy = (chapterNum: number, verseNum: number) => {
+    const verses = chaptersCollection[chapterNum] || [];
+    if (verses.length > 0) {
+      const idx = verses.findIndex(v => v.verse === verseNum);
+      if (idx !== -1) {
+        setActiveStudyChapter(chapterNum);
+        setActiveStudyVerses(verses);
+        setActiveVerseIndex(idx);
+        setStudyPortalOpen(true);
+        document.body.style.overflow = "hidden";
+      } else {
+        alert(`Verse ${verseNum} was not found in Chapter ${chapterNum}.`);
+      }
+    } else {
+      alert(`Chapter ${chapterNum} is coming soon!`);
+    }
+  };
+
+  const addToHistory = (chapter: number, verse: number) => {
+    const historyItem = { chapter, verse, timestamp: Date.now() };
+    setHistoryList(prev => {
+      const filtered = prev.filter(item => !(item.chapter === chapter && item.verse === verse));
+      const updated = [historyItem, ...filtered].slice(0, 10);
+      localStorage.setItem("gita_history", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  useEffect(() => {
+    if (studyPortalOpen && activeStudyVerses.length > 0) {
+      const currentVerse = activeStudyVerses[activeVerseIndex];
+      if (currentVerse) {
+        addToHistory(currentVerse.chapter, currentVerse.verse);
+      }
+    }
+  }, [studyPortalOpen, activeStudyChapter, activeVerseIndex]);
+
+  const isBookmarked = (chapter: number, verse: number) => {
+    return bookmarks.some(b => b.chapter === chapter && b.verse === verse);
+  };
+
+  const toggleBookmark = (chapter: number, verse: number) => {
+    setBookmarks(prev => {
+      let updated;
+      if (prev.some(b => b.chapter === chapter && b.verse === verse)) {
+        updated = prev.filter(b => !(b.chapter === chapter && b.verse === verse));
+      } else {
+        updated = [...prev, { chapter, verse }];
+      }
+      localStorage.setItem("gita_bookmarks", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const handleKeywordSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = keywordQuery.trim().toLowerCase();
+    if (!query) {
+      setSearchResults([]);
+      setSearchTriggered(false);
+      return;
+    }
+
+    const matches: Verse[] = [];
+    Object.entries(chaptersCollection).forEach(([chStr, vList]) => {
+      const chNum = parseInt(chStr);
+      vList.forEach(item => {
+        if (
+          item.translation.toLowerCase().includes(query) ||
+          item.transliteration.toLowerCase().includes(query) ||
+          item.sanskrit.toLowerCase().includes(query) ||
+          item.purport.toLowerCase().includes(query)
+        ) {
+          matches.push(item);
+        }
+      });
+    });
+
+    setSearchResults(matches);
+    setSearchTriggered(true);
+
+    const el = document.getElementById("search-results-section");
+    if (el) {
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
+    }
+  };
+
+  const sendMessageToKrishna = async (textToSend?: string) => {
+    const text = (textToSend || chatInput).trim();
+    if (!text) return;
+
+    if (!textToSend) {
+      setChatInput("");
+    }
+
+    const userMsg = { role: "user" as const, content: text };
+    const updatedMessages = [...chatMessages, userMsg];
+    setChatMessages(updatedMessages);
+    setChatLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: updatedMessages
+        })
+      });
+
+      if (!res.ok) {
+        throw new Error("Krishna AI request failed");
+      }
+
+      const data = await res.json();
+      const content = data.choices[0].message.content;
+      setChatMessages(prev => [...prev, { role: "assistant", content }]);
+    } catch (err) {
+      console.error("Krishna AI Error:", err);
+      setChatMessages(prev => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "My dear friend, a physical obstacle is hindering our spiritual link. Do not be grieved. Reflect upon Chapter 2, Verse 47: 'Perform your prescribed duty, but do not look to the fruits of success or failure.' Please try speaking to Me again in a moment."
+        }
+      ]);
+    } finally {
+      setChatLoading(false);
+    }
   };
 
   // Determine if we should show login/landing or portal
@@ -796,6 +964,249 @@ export default function App() {
             </div>
           </section>
 
+          {/* ================================================== */}
+          {/* WISDOM HUB: BOOKMARKS, HISTORY & TOPIC KEYWORD SEARCH */}
+          {/* ================================================== */}
+          <section className="max-w-[1150px] mx-auto my-24 px-4" id="wisdom-hub">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
+              {/* Column 1 & 2: Divine Topic Search & Keyword Search results */}
+              <div className="lg:col-span-2 bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-10 rounded-3xl shadow-lg hover:border-amber-400 transition-all duration-300">
+                <span className="inline-block px-3 py-1 bg-amber-950 text-amber-200 rounded-full font-serif text-[10px] uppercase tracking-widest font-bold mb-3">
+                  Topic Explorer
+                </span>
+                <h3 className="font-serif text-2xl text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-wide mb-2">
+                  Divine Keyword Explorer
+                </h3>
+                <p className="text-stone-600 dark:text-stone-300 text-sm mb-6">
+                  Search across all 700 verses of the Bhagavad Gita by keyword (e.g. "peace", "anger", "mind", "soul", "duty", "food") to find relevant spiritual shloks.
+                </p>
+
+                <form onSubmit={handleKeywordSearch} className="flex gap-2 items-center bg-[#deb887]/20 dark:bg-amber-950/20 p-2.5 rounded-full border border-[#deb887]/40 dark:border-amber-700/40 mb-8">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-4 top-3 w-4 h-4 text-amber-700 dark:text-amber-400" />
+                    <input 
+                      type="text" 
+                      placeholder="Type a topic: peace, anger, mind, yoga, soul..." 
+                      value={keywordQuery}
+                      onChange={(e) => setKeywordQuery(e.target.value)}
+                      className="w-full bg-white dark:bg-[#1b0f0a] pl-10 pr-4 py-2.5 border border-amber-900/10 rounded-full focus:outline-none focus:border-amber-500 text-sm"
+                    />
+                  </div>
+                  <button 
+                    type="submit"
+                    className="px-6 py-2.5 bg-[#8b4513] hover:bg-[#5d4037] text-white hover:text-amber-200 font-bold rounded-full text-xs cursor-pointer transition-colors"
+                  >
+                    Explore
+                  </button>
+                </form>
+
+                {/* Keyword Search Results */}
+                {searchTriggered && (
+                  <div className="space-y-4 max-h-[350px] overflow-y-auto pr-2 scrollbar-thin" id="search-results-section">
+                    <div className="flex justify-between items-center pb-2 border-b border-stone-100 dark:border-stone-800">
+                      <span className="text-xs font-bold text-amber-800 dark:text-amber-400 uppercase tracking-wider">
+                        Found {searchResults.length} verses
+                      </span>
+                      {searchResults.length > 0 && (
+                        <button 
+                          onClick={() => { setKeywordQuery(""); setSearchResults([]); setSearchTriggered(false); }} 
+                          className="text-[10px] text-stone-400 hover:text-amber-750 font-bold"
+                        >
+                          Clear Results
+                        </button>
+                      )}
+                    </div>
+
+                    {searchResults.length === 0 ? (
+                      <p className="text-center text-stone-500 py-8 text-sm italic">
+                        No matches found for "{keywordQuery}". Try other common keywords like "peace", "duty", "anger", "yoga", "mind", or "fear".
+                      </p>
+                    ) : (
+                      <div className="space-y-3">
+                        {searchResults.map((verseItem) => (
+                          <div 
+                            key={`${verseItem.chapter}-${verseItem.verse}`}
+                            onClick={() => openSpecificVerseForStudy(verseItem.chapter, verseItem.verse)}
+                            className="p-4 bg-stone-50 hover:bg-amber-50/50 dark:bg-[#1b0f0a]/40 dark:hover:bg-amber-950/20 rounded-xl border border-stone-200/50 dark:border-stone-800 cursor-pointer transition-all hover:scale-[1.01] flex flex-col gap-2"
+                          >
+                            <div className="flex justify-between items-center">
+                              <span className="text-xs font-bold text-amber-800 dark:text-amber-400 font-serif">
+                                Verse {verseItem.chapter}.{verseItem.verse}
+                              </span>
+                              <span className="text-[10px] bg-amber-100 dark:bg-amber-950 px-2 py-0.5 rounded text-amber-900 dark:text-amber-200 font-semibold uppercase">
+                                Read Shlok &rarr;
+                              </span>
+                            </div>
+                            <p className="font-devanagari text-[#8b4513] dark:text-amber-400 text-sm font-semibold truncate">
+                              {verseItem.sanskrit}
+                            </p>
+                            <p className="text-stone-600 dark:text-stone-300 text-xs line-clamp-2">
+                              {verseItem.translation}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Default helpful suggestion pills if no results */}
+                {!searchTriggered && (
+                  <div className="space-y-2">
+                    <span className="text-[10px] font-bold text-stone-400 dark:text-stone-500 uppercase tracking-widest block mb-1">
+                      Popular Search Topics
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {["peace", "anger", "mind", "yoga", "soul", "duty", "fear", "food", "work", "desire"].map((word) => (
+                        <button
+                          key={word}
+                          type="button"
+                          onClick={() => {
+                            setKeywordQuery(word);
+                            const matches: Verse[] = [];
+                            Object.entries(chaptersCollection).forEach(([chStr, vList]) => {
+                              const chNum = parseInt(chStr);
+                              vList.forEach(item => {
+                                if (
+                                  item.translation.toLowerCase().includes(word) ||
+                                  item.transliteration.toLowerCase().includes(word) ||
+                                  item.sanskrit.toLowerCase().includes(word) ||
+                                  item.purport.toLowerCase().includes(word)
+                                ) {
+                                  matches.push(item);
+                                }
+                              });
+                            });
+                            setSearchResults(matches);
+                            setSearchTriggered(true);
+                          }}
+                          className="px-3.5 py-1.5 bg-stone-100 dark:bg-[#1b0f0a]/60 hover:bg-amber-100 dark:hover:bg-amber-950/40 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-800 rounded-full text-xs font-medium cursor-pointer transition-colors"
+                        >
+                          #{word}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Column 3: Bookmarks & Live History */}
+              <div className="flex flex-col gap-6 lg:col-span-1">
+                
+                {/* Bookmarks Card */}
+                <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 rounded-3xl shadow-lg flex-1 flex flex-col justify-between hover:border-amber-400 transition-all duration-300">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="font-serif text-base text-amber-900 dark:text-amber-200 font-bold flex items-center gap-2">
+                        <BookMarked className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+                        Saved Wisdom
+                      </h4>
+                      <span className="bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        {bookmarks.length} Saved
+                      </span>
+                    </div>
+
+                    <div className="space-y-3 max-h-[200px] overflow-y-auto pr-1">
+                      {bookmarks.length === 0 ? (
+                        <p className="text-xs text-stone-500 italic py-6 leading-relaxed">
+                          No bookmarks yet. Bookmark your favorite verses during study to keep them saved here for reflection!
+                        </p>
+                      ) : (
+                        bookmarks.map((b) => {
+                          const chapList = chaptersCollection[b.chapter] || [];
+                          const vObj = chapList.find(v => v.verse === b.verse);
+                          return (
+                            <div 
+                              key={`${b.chapter}-${b.verse}`}
+                              className="p-3 bg-stone-50 dark:bg-[#1b0f0a]/40 border border-stone-200 dark:border-stone-850 rounded-xl relative group"
+                            >
+                              <div className="flex justify-between items-start mb-1">
+                                <button 
+                                  onClick={() => openSpecificVerseForStudy(b.chapter, b.verse)}
+                                  className="text-xs font-bold text-[#8b4513] dark:text-amber-300 hover:underline text-left"
+                                >
+                                  Verse {b.chapter}.{b.verse}
+                                </button>
+                                <button 
+                                  onClick={() => toggleBookmark(b.chapter, b.verse)}
+                                  className="text-[10px] text-red-500 hover:text-red-700 font-bold"
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                              {vObj && (
+                                <p className="text-stone-600 dark:text-stone-300 text-[10px] line-clamp-1 pb-1 text-ellipsis overflow-hidden">
+                                  {vObj.translation}
+                                </p>
+                              )}
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* History Card (Continue Reading) */}
+                <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 rounded-3xl shadow-lg flex-1 flex flex-col justify-between hover:border-amber-400 transition-all duration-300">
+                  <div>
+                    <h4 className="font-serif text-base text-amber-900 dark:text-amber-200 font-bold flex items-center gap-2 mb-4">
+                      {/* Using BookOpen as History representation */}
+                      <BookOpen className="w-5 h-5 text-amber-600 dark:text-amber-400 text-stone-600 dark:text-stone-300" />
+                      Reading History
+                    </h4>
+
+                    <div className="space-y-3 max-h-[200px] overflow-y-auto pr-1">
+                      {historyList.length === 0 ? (
+                        <p className="text-xs text-stone-500 italic py-6 leading-relaxed">
+                          Your read path is clear. Begin reading any chapter of the Shrimad Bhagavad Gita to trace your sequence here!
+                        </p>
+                      ) : (
+                        historyList.map((h, i) => {
+                          const chapList = chaptersCollection[h.chapter] || [];
+                          const vObj = chapList.find(v => v.verse === h.verse);
+                          return (
+                            <div 
+                              key={`${h.chapter}-${h.verse}-${h.timestamp}`}
+                              onClick={() => openSpecificVerseForStudy(h.chapter, h.verse)}
+                              className="p-3 bg-stone-50 hover:bg-amber-50/40 dark:bg-[#1b0f0a]/40 dark:hover:bg-amber-950/25 border border-stone-200 dark:border-stone-850 rounded-xl cursor-pointer flex gap-3 items-center"
+                            >
+                              <div className="w-6 h-6 flex items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950 text-[10px] font-bold text-amber-900 dark:text-amber-200 shrink-0">
+                                {i + 1}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-xs font-bold text-[#8b4513] dark:text-amber-300">
+                                  Chapter {h.chapter}, Verse {h.verse}
+                                </div>
+                                {vObj && (
+                                  <p className="text-stone-500 dark:text-stone-400 text-[10px] truncate text-ellipsis overflow-hidden">
+                                    {vObj.translation}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })
+                      )}
+                    </div>
+                  </div>
+                  {historyList.length > 0 && (
+                    <div className="pt-4 mt-2 border-t border-stone-100 dark:border-stone-800 text-center">
+                      <button 
+                        onClick={() => openSpecificVerseForStudy(historyList[0].chapter, historyList[0].verse)}
+                        className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline uppercase tracking-wide cursor-pointer flex items-center gap-1 justify-center mx-auto"
+                      >
+                        ⚡ Continue Reading &rarr;
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            </div>
+          </section>
+
           {/* CHAPTERS OF THE GITA SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="chapters-section">
             <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
@@ -1089,12 +1500,26 @@ export default function App() {
                       Gita Study Center — Chapter {activeStudyChapter}
                     </h2>
                   </div>
-                  <button 
-                    onClick={closeStudyPortal}
-                    className="p-1 px-3 rounded-full border border-amber-800 text-amber-950 dark:text-amber-200 bg-transparent hover:bg-amber-800 hover:text-white dark:hover:bg-amber-700 font-bold transition-all text-xs cursor-pointer"
-                  >
-                    ✕ Exit Study
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button 
+                      onClick={() => toggleBookmark(activeStudyChapter, activeStudyVerses[activeVerseIndex].verse)}
+                      className={`px-3 py-1.5 rounded-full border flex items-center gap-1.5 transition-all text-xs cursor-pointer font-bold ${
+                        isBookmarked(activeStudyChapter, activeStudyVerses[activeVerseIndex].verse)
+                          ? "bg-amber-100 dark:bg-amber-950 border-amber-500 text-amber-900 dark:text-amber-200"
+                          : "border-stone-300 dark:border-stone-700 bg-transparent text-[#8b4513] dark:text-amber-300 hover:bg-stone-50 dark:hover:bg-amber-950/20"
+                      }`}
+                      title="Bookmark this verse"
+                    >
+                      <BookMarked className={`w-4 h-4 ${isBookmarked(activeStudyChapter, activeStudyVerses[activeVerseIndex].verse) ? "fill-amber-600 text-amber-600 dark:fill-amber-400 dark:text-amber-400" : ""}`} />
+                      <span>{isBookmarked(activeStudyChapter, activeStudyVerses[activeVerseIndex].verse) ? "Bookmarked" : "Bookmark"}</span>
+                    </button>
+                    <button 
+                      onClick={closeStudyPortal}
+                      className="p-1 px-3.5 py-1.5 rounded-full border border-amber-800 text-amber-950 dark:text-amber-200 bg-transparent hover:bg-amber-800 hover:text-white dark:hover:bg-amber-700 font-bold transition-all text-xs cursor-pointer"
+                    >
+                      ✕ Exit Study
+                    </button>
+                  </div>
                 </div>
 
                 {/* Main Scrollable Wisdom Area */}
@@ -1270,6 +1695,123 @@ export default function App() {
               </div>
             </div>
           )}
+
+          {/* ================================================== */}
+          {/* LORD KRISHNA DIVINE AI COUNSEL CHATBOT */}
+          {/* ================================================== */}
+          <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
+            
+            {/* Expanded Conversation Drawer */}
+            {chatOpen && (
+              <div className="w-[340px] sm:w-[400px] h-[520px] bg-[#fdfaf2] dark:bg-[#190e0a] border-2 border-[#d4af37] rounded-3xl shadow-3xl flex flex-col overflow-hidden mb-4 transition-all duration-300 animate-slide-up">
+                
+                {/* Chat Header */}
+                <div className="bg-gradient-to-r from-[#8b4513] to-[#5d3011] p-4 text-stone-100 flex items-center justify-between border-b border-[#d4af37]/40 shadow-sm shrink-0">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-2xl animate-pulse">👑</span>
+                    <div>
+                      <h4 className="font-serif font-black tracking-wide text-sm text-[#ffd700]">
+                        DIVINE AI COUNSEL
+                      </h4>
+                      <p className="text-[10px] text-amber-200 opacity-90 font-medium">Lord Sri Krishna's Guide</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => setChatOpen(false)}
+                    className="p-1.5 rounded-full hover:bg-white/10 text-amber-300 cursor-pointer"
+                    title="Close Counsel"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Messages Panel Panel */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth">
+                  {chatMessages.map((msg, index) => (
+                    <div 
+                      key={index}
+                      className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start animate-fade-in"}`}
+                    >
+                      <div 
+                        className={`p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${
+                          msg.role === "user" 
+                            ? "bg-amber-800 text-amber-50 rounded-br-none max-w-[85%] shadow-sm"
+                            : "bg-white dark:bg-[#2c1b12]/50 text-stone-800 dark:text-stone-100 border border-amber-200/50 dark:border-amber-900/30 rounded-bl-none max-w-[85%] shadow-2xs whitespace-pre-line"
+                        }`}
+                      >
+                        {msg.content}
+                      </div>
+                      <span className="text-[9px] text-stone-400 dark:text-stone-500 mt-1 px-1 font-serif">
+                        {msg.role === "user" ? "You (Seeker)" : "Lord Krishna"}
+                      </span>
+                    </div>
+                  ))}
+
+                  {chatLoading && (
+                    <div className="flex items-center gap-2 text-xs text-amber-800 dark:text-amber-400 font-serif italic animate-pulse">
+                      <span>👑</span>
+                      <span>The Lord is channeling divine consciousness...</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Preset Suggestions Row */}
+                <div className="px-3 py-2 bg-stone-50 dark:bg-stone-900/40 border-t border-stone-200/40 dark:border-stone-850 overflow-x-auto whitespace-nowrap scrollbar-none flex gap-2 shrink-0">
+                  {[
+                    "How do I control my overthinking?",
+                    "I feel extremely stressed about my studies and career.",
+                    "What advice is there for handling emotional pain?",
+                    "Tell Me how to act when I feel demotivated."
+                  ].map((pill, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => sendMessageToKrishna(pill)}
+                      disabled={chatLoading}
+                      className="px-3 py-1.5 bg-[#f5ebe0] hover:bg-amber-100 dark:bg-[#1b0f0a] dark:hover:bg-amber-950/20 text-[#8b4513] dark:text-amber-300 border border-amber-900/10 rounded-full text-[11px] font-medium transition-colors cursor-pointer shrink-0 disabled:opacity-40"
+                    >
+                      {pill}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Input Controls */}
+                <form 
+                  onSubmit={(e) => { e.preventDefault(); sendMessageToKrishna(); }}
+                  className="p-3 bg-white dark:bg-[#1c110a] border-t border-stone-100 dark:border-stone-850 flex gap-2 items-center shrink-0"
+                >
+                  <input
+                    type="text"
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    disabled={chatLoading}
+                    placeholder="Speak your mind, seeker..."
+                    className="flex-1 bg-stone-50 dark:bg-[#100906] border border-stone-200 dark:border-amber-950 rounded-full px-4 py-2 text-xs sm:text-sm focus:outline-none focus:border-amber-500 disabled:opacity-50"
+                  />
+                  <button
+                    type="submit"
+                    disabled={chatLoading}
+                    className="p-2.5 bg-amber-800 hover:bg-amber-700 text-white rounded-full cursor-pointer transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center shadow-md border-none"
+                    title="Send to Krishna"
+                  >
+                    <Sparkles className="w-4 h-4 text-amber-200" />
+                  </button>
+                </form>
+
+              </div>
+            )}
+
+            {/* Glowing Saffron Floating Launcher Button */}
+            <button
+              onClick={() => setChatOpen(!chatOpen)}
+              className="bg-gradient-to-r from-[#ff4500] via-[#8b4513] to-[#ff8c00] hover:scale-105 active:scale-95 text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full flex items-center gap-2 shadow-[0_4px_15px_rgba(255,140,0,0.4)] border border-[#ffd700]/30 hover:border-[#ffd700] transition-all cursor-pointer select-none group"
+            >
+              <Sparkles className="w-5 h-5 text-amber-200 animate-spin-slow" />
+              <span className="font-serif font-black tracking-widest text-xs hidden sm:inline uppercase text-amber-100">
+                {chatOpen ? "Close Counsel" : "Krishna AI Counsel"}
+              </span>
+            </button>
+
+          </div>
         </>
       )}
 
