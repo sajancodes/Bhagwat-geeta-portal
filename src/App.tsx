@@ -297,7 +297,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen font-sans antialiased text-gray-900 transition-colors duration-300 ${darkMode ? "dark bg-[#1b0f0a] text-stone-100" : "bg-[#fcf9f2] text-[#4a3628]"}`}>
+    <div className={`min-h-screen font-sans antialiased text-gray-900 transition-colors duration-300 ${darkMode ? "dark bg-[#1b0f0a] text-stone-100" : "bg-[#faf6ee] text-[#4a3628]"}`}>
       
       {/* 1. AUTHENTICATION MODULE */}
       {!showMainSite && (
@@ -612,7 +612,7 @@ export default function App() {
 
           {/* DYNAMIC VERSE OF THE DAY SECTION */}
           <section className="max-w-[1150px] mx-auto my-16 px-4" id="votd-section">
-            <div className="bg-white dark:bg-[#26160f] rounded-3xl border-3 border-[#b8860b] p-8 md:p-12 shadow-2xl relative transition-all duration-300 hover:shadow-orange-950/5 hover:border-amber-400">
+            <div className="bg-white dark:bg-[#26160f] rounded-3xl border-2 border-amber-300 dark:border-amber-700/60 p-8 md:p-12 shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] relative transition-all duration-300 hover:border-amber-400">
               
               <div className="absolute -top-5 left-1/2 transform -translate-x-1/2">
                 <span className="bg-gradient-to-r from-[#8b4513] to-[#b8860b] text-[#ffd700] px-8 py-2.5 rounded-full font-serif text-sm font-bold uppercase tracking-widest shadow-md">
@@ -650,138 +650,134 @@ export default function App() {
 
           {/* DIVINE AUTHORS SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="author-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              The Divine Authors
-            </h2>
-            <div className="h-[2px] w-36 bg-[#deb887] mx-auto my-4 mb-12" />
-
-            {/* Main illustration placeholder box */}
-            <div className="flex justify-center mb-12">
-              <div className="p-4 bg-white dark:bg-[#26160f] border-2 border-[#deb887] dark:border-amber-700 rounded-2xl shadow-md overflow-hidden max-w-lg">
-                <img 
-                  src="images/authors.jpg" 
-                  alt="Ancient Sacred Art Representing Divine Dictation" 
-                  className="w-full h-auto max-h-[300px] object-cover rounded-xl grayscale-[20%] hover:grayscale-0 transition-all"
-                  referrerPolicy="no-referrer"
-                />
-                <p className="text-center font-serif italic text-xs text-amber-800/80 dark:text-stone-400 mt-3">
-                  Dictation of Mahabharata: Maharishi Ved Vyasa communicating the epic to Lord Ganesha
-                </p>
-              </div>
-            </div>
-
-            {/* Dual Authors Vertical Flex Card */}
-            <div className="flex flex-col items-center gap-8">
+            <div className="p-6 sm:p-12 md:p-16 bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] flex flex-col items-center">
               
-              {/* Vyasa Card */}
-              <div className="bg-white dark:bg-[#26160f] border-3 border-[#deb887] dark:border-amber-700 p-8 rounded-2xl shadow-lg w-full max-w-[850px] hover:border-amber-500 transition-all duration-300">
-                <div className="text-center space-y-4">
-                  <h3 className="font-serif text-2xl text-stone-800 dark:text-amber-200">Maharishi Ved Vyasa</h3>
-                  <span className="inline-block text-xs uppercase text-[#8b4513] dark:text-amber-400 font-bold border-b-2 border-amber-400 pb-1">
-                    The Compiler
-                  </span>
-                  <p className="text-justify leading-relaxed text-gray-700 dark:text-stone-300 text-sm sm:text-base">
-                    Maharishi Ved Vyasa, born as <span className="text-amber-700 dark:text-amber-400 font-semibold">Krishna Dvaipayana</span>, 
-                    was the son of Sage <span className="text-amber-700 dark:text-amber-400 font-semibold">Parashara</span> and 
-                    <span className="text-amber-700 dark:text-amber-400 font-semibold">Satyavati</span>. He is regarded as a 
-                    <span className="text-amber-700 dark:text-amber-400 font-semibold">Chiranjivi</span> (immortal) and the architect of Vedic knowledge. 
-                    He classified the original Vedas into four and authored the cosmic Mahabharata. 
-                    Uniquely, he was both the <span className="text-amber-700 dark:text-amber-400 font-semibold">grandfather</span> of the Pandavas and Kauravas 
-                    and the narrator of their fateful lives. He granted the <span className="text-amber-700 dark:text-amber-400 font-semibold">divine vision</span> (divya-drishti) to Sanjaya.
-                  </p>
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-8 select-none">
+                THE DIVINE AUTHORS
+              </h2>
+
+              {/* Main illustration placeholder box */}
+              <div className="flex justify-center mb-10 w-full">
+                <div className="p-3 bg-white dark:bg-[#1b0f0a] border border-[#deb887] dark:border-amber-700/60 rounded-2xl shadow-md overflow-hidden max-w-sm w-full">
+                  <img 
+                    src="images/authors.jpg" 
+                    alt="Ancient Sacred Art Representing Divine Dictation" 
+                    className="w-full h-auto object-cover rounded-xl transition-all"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
               </div>
 
-              {/* Ganesha Card */}
-              <div className="bg-white dark:bg-[#26160f] border-3 border-[#deb887] dark:border-amber-700 p-8 rounded-2xl shadow-lg w-full max-w-[850px] hover:border-amber-500 transition-all duration-300">
-                <div className="text-center space-y-4">
-                  <h3 className="font-serif text-2xl text-stone-800 dark:text-amber-200">Lord Ganesha</h3>
-                  <span className="inline-block text-xs uppercase text-[#8b4513] dark:text-amber-400 font-bold border-b-2 border-amber-400 pb-1">
-                    The Divine Scribe
-                  </span>
-                  <p className="text-justify leading-relaxed text-gray-700 dark:text-stone-300 text-sm sm:text-base">
-                    Lord Ganesha, the son of <span className="text-amber-700 dark:text-amber-400 font-semibold">Lord Shiva</span> and 
-                    <span className="text-amber-700 dark:text-amber-400 font-semibold">Goddess Parvati</span>, is revered as the 
-                    <span className="text-amber-700 dark:text-amber-400 font-semibold">Vighnaharta</span> (remover of obstacles) and the patron of 
-                    <span className="text-amber-700 dark:text-amber-400 font-semibold">intellect and wisdom</span>. When Sage Ved Vyasa conceived the vast epic, 
-                    he required a scribe capable of matching his conceptual depth. Lord Ganesha accepted on the condition that Vyasa would not pause the dictation. 
-                    To maintain this pace, Ganesha broke his own <span className="text-amber-700 dark:text-amber-400 font-semibold">tusk</span> to use as a style, 
-                    symbolizing sacrifice for sacred knowledge.
-                  </p>
+              {/* Dual Authors Vertical Flex Card */}
+              <div className="flex flex-col items-center gap-7 w-full">
+                
+                {/* Vyasa Card */}
+                <div className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 border border-amber-200 dark:border-amber-800/60 p-6 sm:p-10 rounded-2xl shadow-sm w-full hover:border-amber-400 transition-all duration-300">
+                  <div className="text-center space-y-3">
+                    <h3 className="font-serif text-xl sm:text-2xl text-[#8b4513] dark:text-amber-200 uppercase tracking-widest">
+                      MAHARISHI VED VYASA
+                    </h3>
+                    <div className="text-[10px] uppercase font-bold text-[#8b4513] dark:text-amber-400 bg-amber-50/50 dark:bg-amber-950/30 border border-[#deb887] rounded-sm px-3 py-0.5 tracking-widest inline-block">
+                      THE COMPILER
+                    </div>
+                    <p className="text-center leading-relaxed text-stone-700 dark:text-stone-300 text-xs sm:text-sm font-sans">
+                      Maharishi Ved Vyasa, born as <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Krishna Dvaipayana</span>, was the son of Sage <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Parashara</span> and <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Satyavati</span>. He is regarded as a <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Chiranjivi</span> and the architect of Vedic knowledge. He classified the Vedas into four and authored the Mahabharata. Uniquely, he was both the <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">grandfather</span> of the Pandavas and Kauravas and the narrator of their story. He dictated the epic to <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Lord Ganesha</span> and granted <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">divine vision</span> to Sanjaya. His presence ensured the preservation of <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Dharma</span> for future generations.
+                    </p>
+                  </div>
                 </div>
+
+                {/* Ganesha Card */}
+                <div className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 border border-amber-200 dark:border-amber-800/60 p-6 sm:p-10 rounded-2xl shadow-sm w-full hover:border-amber-400 transition-all duration-300">
+                  <div className="text-center space-y-3">
+                    <h3 className="font-serif text-xl sm:text-2xl text-[#8b4513] dark:text-amber-200 uppercase tracking-widest">
+                      LORD GANESHA
+                    </h3>
+                    <div className="text-[10px] uppercase font-bold text-[#8b4513] dark:text-amber-400 bg-amber-50/50 dark:bg-amber-950/30 border border-[#deb887] rounded-sm px-3 py-0.5 tracking-widest inline-block">
+                      THE DIVINE SCRIBE
+                    </div>
+                    <p className="text-center leading-relaxed text-stone-700 dark:text-stone-300 text-xs sm:text-sm font-sans">
+                      Lord Ganesha, the son of <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Lord Shiva</span> and <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Goddess Parvati</span>, is revered as the <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Vighnaharta</span> or remover of obstacles and the patron of <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">Intellect and wisdom</span>. In the context of the Mahabharata, he played the indispensable role of the <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">divine scribe</span>. When Sage Ved Vyasa conceived the vast epic, he required a writer capable of matching his depth. Ganesha accepted on the condition that Vyasa would not pause. To fulfill this, he broke his own <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">tusk</span> to use as a stylus, symbolizing sacrifice for sacred knowledge. His role transformed the epic from <span className="bg-[#fff9db] dark:bg-amber-950/50 text-[#8b4513] dark:text-[#ffd700] px-1.5 py-0.5 rounded-md font-semibold">oral tradition</span> into a timeless written masterpiece.
+                    </p>
+                  </div>
+                </div>
+
               </div>
 
             </div>
           </section>
 
           {/* BENEFIT SECTION: WHO IS THE GITA FOR? */}
-          <section className="max-w-[1250px] mx-auto my-24 px-4 overflow-hidden" id="benefit-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Who is the Gita For?
-            </h2>
-            <p className="text-center text-stone-600 dark:text-stone-300 italic text-sm sm:text-base mt-2 mb-8">
-              A universal manual providing 5,000 years of wisdom for modern challenges.
-            </p>
+          <section className="max-w-[1150px] mx-auto my-24 px-4 overflow-hidden" id="benefit-section">
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Who is the Gita For?
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 italic text-sm sm:text-base mb-8">
+                A universal manual providing 5,000 years of wisdom for modern challenges.
+              </p>
 
-            {/* Swipeable Scroll container with custom cards */}
-            <div className="flex gap-6 overflow-x-auto pb-8 pt-4 px-2 snap-x scrollbar-none scroll-smooth">
-              {benefitCards.map((card, idx) => (
-                <div 
-                  key={idx}
-                  className="bg-white dark:bg-[#26160f] w-[290px] shrink-0 border-2 border-[#deb887] dark:border-amber-700 p-6 rounded-2xl shadow-md hover:border-amber-500 hover:-translate-y-2 select-none snap-center transition-all duration-300 flex flex-col items-center justify-between text-center aspect-square"
-                >
-                  <div className="text-4xl mb-2">{card.icon}</div>
-                  <h4 className="font-serif text-amber-900 dark:text-amber-200 text-lg font-bold">{card.title}</h4>
-                  <p className="text-xs sm:text-sm text-gray-700 dark:text-stone-300 leading-relaxed max-w-[240px]">
-                    {card.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-            
-            {/* Guide hint */}
-            <div className="text-center text-xs text-amber-800/80 dark:text-stone-400/80 animate-pulse">
-              &larr; Drag or scroll horizontally to see all profiles &rarr;
+              {/* Swipeable Scroll container with custom cards */}
+              <div className="flex gap-6 overflow-x-auto pb-8 pt-4 px-2 snap-x scrollbar-none scroll-smooth">
+                {benefitCards.map((card, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 w-[270px] shrink-0 border border-amber-200 dark:border-amber-800 p-6 rounded-2xl shadow-sm hover:border-amber-400 hover:-translate-y-2 select-none snap-center transition-all duration-300 flex flex-col items-center justify-between text-center aspect-square"
+                  >
+                    <div className="text-4xl mb-2">{card.icon}</div>
+                    <h4 className="font-serif text-amber-900 dark:text-amber-200 text-base font-bold">{card.title}</h4>
+                    <p className="text-xs text-gray-700 dark:text-stone-300 leading-relaxed max-w-[240px]">
+                      {card.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Guide hint */}
+              <div className="text-center text-xs text-amber-800/80 dark:text-stone-400/80 animate-pulse mt-4">
+                &larr; Drag or scroll horizontally to see all profiles &rarr;
+              </div>
             </div>
           </section>
 
           {/* GLOBAL TRIBUTES SECTION */}
-          <section className="max-w-[1250px] mx-auto my-24 px-4" id="global-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Gita Around the World
-            </h2>
-            <p className="text-center text-stone-600 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              How the world's greatest minds found inspiration in the Divine Song.
-            </p>
+          <section className="max-w-[1150px] mx-auto my-24 px-4" id="global-section">
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Gita Around the World
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-400 mb-12 italic text-sm">
+                How the world's greatest minds found inspiration in the Divine Song.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {tributeCards.map((card, idx) => (
-                <div 
-                  key={idx}
-                  className="bg-white dark:bg-[#26160f] p-8 rounded-2xl border-2 border-[#deb887] dark:border-amber-800 shadow-md flex flex-col justify-between hover:border-amber-500 transition-all duration-300"
-                >
-                  <p className="text-sm italic text-[#5d4037] dark:text-stone-200 leading-relaxed mb-6">
-                    {card.quote}
-                  </p>
-                  <div className="border-t border-amber-900/10 dark:border-amber-500/10 pt-4 flex flex-col">
-                    <span className="font-serif text-amber-900 dark:text-amber-200 font-bold text-base">{card.name}</span>
-                    <span className="text-xs text-amber-700/80 dark:text-amber-400/80 uppercase font-semibold tracking-wider">{card.profession}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {tributeCards.map((card, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 p-8 rounded-2xl border border-amber-200 dark:border-amber-800 shadow-sm flex flex-col justify-between hover:border-amber-400 transition-all duration-300"
+                  >
+                    <p className="text-sm italic text-[#5d4037] dark:text-stone-200 leading-relaxed mb-6">
+                      {card.quote}
+                    </p>
+                    <div className="border-t border-amber-900/10 dark:border-amber-500/10 pt-4 flex flex-col">
+                      <span className="font-serif text-amber-900 dark:text-amber-200 font-bold text-base">{card.name}</span>
+                      <span className="text-xs text-amber-700/80 dark:text-amber-400/80 uppercase font-semibold tracking-wider">{card.profession}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
           {/* LEGENDS OF MAHABHARAT DISPATCHER */}
           <section className="max-w-[1150px] mx-auto my-24 px-4 text-center" id="legends-section">
-            <div className="bg-amber-100/40 dark:bg-[#26160f] rounded-3xl border-3 border-[#b8860b] p-10 md:p-14 shadow-xl space-y-6">
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 rounded-3xl p-10 md:p-14 shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400 space-y-6">
               <span className="inline-block px-4 py-1.5 bg-amber-800 text-stone-100 rounded-full font-serif text-xs uppercase tracking-widest font-bold">
                 Chronicles of Dharma
               </span>
-              <h2 className="font-serif text-3xl sm:text-5xl text-amber-900 dark:text-amber-200 uppercase tracking-wide">
+              <h2 className="font-serif text-3xl sm:text-4xl text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] select-none">
                 Legends of Mahabharat
               </h2>
-              <p className="text-gray-700 dark:text-stone-200 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+              <p className="text-stone-600 dark:text-stone-300 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
                 Explore the profiles, origins, and critical roles of the 20 legendary souls who shaped the battle of Kurukshetra. Meet friends, foes, sages, and warriors under the divine guidance of Lord Krishna.
               </p>
               
@@ -792,7 +788,7 @@ export default function App() {
                     setActiveLegendIndex(0);
                     document.body.style.overflow = "hidden";
                   }}
-                  className="px-8 py-3.5 bg-amber-800 text-amber-200 dark:bg-amber-700 hover:bg-[#8b4513] font-bold rounded-full cursor-pointer shadow-md transition-all uppercase tracking-widest text-sm"
+                  className="px-8 py-3.5 bg-[#8b4513] text-amber-200 dark:bg-amber-700 hover:bg-[#5d4037] hover:text-white font-bold rounded-full cursor-pointer shadow-md transition-all uppercase tracking-widest text-sm"
                 >
                   Enter the Legends Portal &rarr;
                 </button>
@@ -802,243 +798,255 @@ export default function App() {
 
           {/* CHAPTERS OF THE GITA SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="chapters-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              The 18 Spiritual Chapters
-            </h2>
-            <p className="text-center text-[#a47148] dark:text-amber-400 mt-2 italic text-sm sm:text-base mb-8">
-              Explore the 700 verses of divine conversation
-            </p>
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                The 18 Spiritual Chapters
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 italic text-sm sm:text-base mb-8">
+                Explore the 700 verses of divine conversation
+              </p>
 
-            {/* Direct verse finder search input */}
-            <form onSubmit={handleDirectSearch} className="max-w-md mx-auto mb-12 flex gap-2 items-center justify-center bg-[#deb887]/20 dark:bg-amber-950/20 p-3 rounded-full border border-[#deb887]/40 dark:border-amber-700/40">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-2.5 w-4 h-4 text-amber-700 dark:text-amber-400" />
-                <input 
-                  type="text" 
-                  placeholder="Seach chapter.verse (e.g. 2.47)" 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white dark:bg-[#1b0f0a] pl-9 pr-4 py-2 border border-amber-900/10 rounded-full focus:outline-none focus:border-amber-500 text-xs sm:text-sm"
-                />
-              </div>
-              <button 
-                type="submit"
-                className="px-5 py-2 bg-[#8b4513] hover:bg-[#5d4037] text-white hover:text-amber-200 font-bold rounded-full text-xs cursor-pointer transition-colors"
-              >
-                Study
-              </button>
-            </form>
-
-            {/* Chapters list grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {gitaChapters.map((chap) => (
-                <div 
-                  key={chap.num}
-                  onClick={() => openChapterForStudy(chap.num)}
-                  className="chapter-box bg-white dark:bg-[#26160f] border-2 border-[#deb887] dark:border-amber-800 p-6 rounded-2xl cursor-pointer hover:bg-[#8b4513] dark:hover:bg-amber-900 hover:border-[#ffd700] hover:scale-[1.02] group transition-all duration-300 relative overflow-hidden"
-                >
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#8b4513] dark:bg-amber-700 group-hover:bg-[#ffd700]" />
-                  <div className="flex justify-between text-xs text-stone-500 dark:text-stone-400 group-hover:text-amber-300 font-semibold">
-                    <span>CHAPTER {chap.num}</span>
-                    <span>{chap.verses} VERSES</span>
-                  </div>
-                  <h3 className="font-serif text-lg text-[#8b4513] dark:text-[#ffd700] group-hover:text-white mt-3 font-extrabold">
-                    {chap.name}
-                  </h3>
-                  <p className="text-xs text-gray-600 dark:text-stone-300 group-hover:text-stone-200 italic mt-1 font-medium">
-                    {chap.subtitle}
-                  </p>
+              {/* Direct verse finder search input */}
+              <form onSubmit={handleDirectSearch} className="max-w-md mx-auto mb-12 flex gap-2 items-center justify-center bg-[#deb887]/20 dark:bg-amber-950/20 p-3 rounded-full border border-[#deb887]/40 dark:border-amber-700/40">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-2.5 w-4 h-4 text-amber-700 dark:text-amber-400" />
+                  <input 
+                    type="text" 
+                    placeholder="Search chapter.verse (e.g. 2.47)" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-white dark:bg-[#1b0f0a] pl-9 pr-4 py-2 border border-amber-900/10 rounded-full focus:outline-none focus:border-amber-500 text-xs sm:text-sm"
+                  />
                 </div>
-              ))}
+                <button 
+                  type="submit"
+                  className="px-5 py-2 bg-[#8b4513] hover:bg-[#5d4037] text-white hover:text-amber-200 font-bold rounded-full text-xs cursor-pointer transition-colors"
+                >
+                  Study
+                </button>
+              </form>
+
+              {/* Chapters list grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {gitaChapters.map((chap) => (
+                  <div 
+                    key={chap.num}
+                    onClick={() => openChapterForStudy(chap.num)}
+                    className="chapter-box bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 border-2 border-amber-200 dark:border-amber-850 p-6 rounded-2xl cursor-pointer hover:bg-[#8b4513] dark:hover:bg-amber-900 hover:border-amber-400 hover:scale-[1.02] group transition-all duration-300 relative overflow-hidden"
+                  >
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#8b4513] dark:bg-amber-700 group-hover:bg-[#ffd700]" />
+                    <div className="flex justify-between text-xs text-stone-500 dark:text-stone-400 group-hover:text-amber-300 font-semibold">
+                      <span>CHAPTER {chap.num}</span>
+                      <span>{chap.verses} VERSES</span>
+                    </div>
+                    <h3 className="font-serif text-lg text-[#8b4513] dark:text-[#ffd700] group-hover:text-white mt-3 font-extrabold">
+                      {chap.name}
+                    </h3>
+                    <p className="text-xs text-gray-650 dark:text-stone-300 group-hover:text-stone-200 italic mt-1 font-medium">
+                      {chap.subtitle}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
           {/* ESSENTIAL PIVOTAL VERSES SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="verses-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Essential Verses
-            </h2>
-            <p className="text-center text-stone-500 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              Pivotal shloks that define the essence of the Bhagavad Gita study.
-            </p>
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Essential Verses
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 mb-12 italic text-sm">
+                Pivotal shloks that define the essence of the Bhagavad Gita study.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { ref: "2.47", chapter: 2, verse: 47, category: "Karma Yoga", title: "Law of Detached Duty", desc: "Perform your duty without attachment to the results; remain equanimous in success and failure." },
-                { ref: "4.7", chapter: 4, verse: 7, category: "Avatara", title: "Divine Descent", desc: "Whenever righteousness declines and evil prevails, the Divine manifests on Earth." },
-                { ref: "2.20", chapter: 2, verse: 20, category: "Sankhya Yoga", title: "Eternity of the Soul", desc: "The soul is never born, nor does it ever die. It is ancient, eternal, and indestructible." },
-                { ref: "18.66", chapter: 18, verse: 66, category: "Moksha Yoga", title: "Final Surrender", desc: "Abandon all varieties of systemized duties and surrender to the Supreme. Fear not." },
-                { ref: "9.22", chapter: 9, verse: 22, category: "Bhakti Yoga", title: "Divine Protection", desc: "For those who worship with exclusive devotion, the Lord carries and secures their needs." },
-                { ref: "15.7", chapter: 15, verse: 7, category: "Purushottama", title: "The Eternal Fragment", desc: "The living entities are eternal fragments of the Divine, struggling with material senses." }
-              ].map((vItem, idx) => (
-                <div 
-                  key={idx}
-                  onClick={() => openChapterForStudy(vItem.chapter)}
-                  className="bg-white dark:bg-[#26160f] rounded-2xl border-2 border-[#deb887] dark:border-amber-800 p-6 flex flex-col justify-between hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-sm group"
-                >
-                  <div>
-                    <span className="inline-block px-3 py-1 text-[10px] uppercase font-bold tracking-wider rounded-md bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 mb-4">
-                      {vItem.category}
-                    </span>
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-xs text-amber-700 font-bold dark:text-amber-400">BG {vItem.ref}</span>
-                      <Sparkles className="w-4 h-4 text-[#ffd700] opacity-60" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { ref: "2.47", chapter: 2, verse: 47, category: "Karma Yoga", title: "Law of Detached Duty", desc: "Perform your duty without attachment to the results; remain equanimous in success and failure." },
+                  { ref: "4.7", chapter: 4, verse: 7, category: "Avatara", title: "Divine Descent", desc: "Whenever righteousness declines and evil prevails, the Divine manifests on Earth." },
+                  { ref: "2.20", chapter: 2, verse: 20, category: "Sankhya Yoga", title: "Eternity of the Soul", desc: "The soul is never born, nor does it ever die. It is ancient, eternal, and indestructible." },
+                  { ref: "18.66", chapter: 18, verse: 66, category: "Moksha Yoga", title: "Final Surrender", desc: "Abandon all varieties of systemized duties and surrender to the Supreme. Fear not." },
+                  { ref: "9.22", chapter: 9, verse: 22, category: "Bhakti Yoga", title: "Divine Protection", desc: "For those who worship with exclusive devotion, the Lord carries and secures their needs." },
+                  { ref: "15.7", chapter: 15, verse: 7, category: "Purushottama", title: "The Eternal Fragment", desc: "The living entities are eternal fragments of the Divine, struggling with material senses." }
+                ].map((vItem, idx) => (
+                  <div 
+                    key={idx}
+                    onClick={() => openChapterForStudy(vItem.chapter)}
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 rounded-2xl border-2 border-amber-200 dark:border-amber-805 p-6 flex flex-col justify-between hover:border-amber-500 hover:-translate-y-1 transition-all duration-300 cursor-pointer shadow-sm group"
+                  >
+                    <div>
+                      <span className="inline-block px-3 py-1 text-[10px] uppercase font-bold tracking-wider rounded-md bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 mb-4">
+                        {vItem.category}
+                      </span>
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="text-xs text-amber-700 font-bold dark:text-amber-400">BG {vItem.ref}</span>
+                        <Sparkles className="w-4 h-4 text-[#ffd700] opacity-60" />
+                      </div>
+                      <h3 className="font-serif text-lg text-[#8b4513] dark:text-[#ffd700] mb-2">{vItem.title}</h3>
+                      <p className="text-gray-700 dark:text-stone-300 text-sm leading-relaxed">
+                        {vItem.desc}
+                      </p>
                     </div>
-                    <h3 className="font-serif text-lg text-[#8b4513] dark:text-[#ffd700] mb-2">{vItem.title}</h3>
-                    <p className="text-gray-700 dark:text-stone-300 text-sm leading-relaxed">
-                      {vItem.desc}
-                    </p>
+                    
+                    <div className="pt-4 border-t border-amber-900/5 mt-4 flex justify-between items-center text-xs font-bold text-amber-800 dark:text-amber-400 group-hover:text-amber-500">
+                      <span>Read Verse</span>
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </div>
                   </div>
-                  
-                  <div className="pt-4 border-t border-amber-900/5 mt-4 flex justify-between items-center text-xs font-bold text-amber-800 dark:text-amber-400 group-hover:text-amber-500">
-                    <span>Read Verse</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
           {/* GITA IN DAILY LIFE SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="daily-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Gita in Daily Life
-            </h2>
-            <p className="text-center text-stone-500 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              Practical applications of ancient Vedic guidelines for modern scenarios.
-            </p>
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Gita in Daily Life
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 mb-12 italic text-sm">
+                Practical applications of ancient Vedic guidelines for modern scenarios.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { icon: "🧠", ref: "BG 6.5", shlok: "उद्धरेदात्मनात्मानं नात्मानमवसादयेत् |", title: "Mastering the Mind", desc: "Uplift yourself through the power of your own mind; do not allow yourself to degrade." },
-                { icon: "🌍", ref: "BG 5.18", shlok: "विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि |", title: "Universal Compassion", desc: "The wise see with equal, non-judgmental vision a learned scholar, a cow, or an elephant." },
-                { icon: "⚖️", ref: "BG 6.17", shlok: "युक्ताहारविहारस्य युक्तचेष्टस्य कर्मसु |", title: "Healthy & Balanced Living", desc: "Yoga destroys all pain for the one who maintains balance in eating, sleeping, and working." }
-              ].map((item, idx) => (
-                <div 
-                  key={idx}
-                  className="bg-white dark:bg-[#26160f] p-6 rounded-2xl border border-[#deb887] dark:border-amber-800 flex flex-col justify-between"
-                >
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-2xl">{item.icon}</span>
-                      <span className="text-xs text-orange-900/60 dark:text-amber-400 tracking-wider font-semibold">{item.ref}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { icon: "🧠", ref: "BG 6.5", shlok: "उद्धरेदात्मनात्मानं नात्मानमवसादयेत् |", title: "Mastering the Mind", desc: "Uplift yourself through the power of your own mind; do not allow yourself to degrade." },
+                  { icon: "🌍", ref: "BG 5.18", shlok: "विद्याविनयसम्पन्ने ब्राह्मणे गवि हस्तिनि |", title: "Universal Compassion", desc: "The wise see with equal, non-judgmental vision a learned scholar, a cow, or an elephant." },
+                  { icon: "⚖️", ref: "BG 6.17", shlok: "युक्ताहारविहारस्य युक्तचेष्टस्य कर्मसु |", title: "Healthy & Balanced Living", desc: "Yoga destroys all pain for the one who maintains balance in eating, sleeping, and working." }
+                ].map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 p-6 rounded-2xl border border-amber-200 dark:border-amber-800 flex flex-col justify-between"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-2xl">{item.icon}</span>
+                        <span className="text-xs text-orange-900/60 dark:text-amber-400 tracking-wider font-semibold">{item.ref}</span>
+                      </div>
+                      <p className="font-devanagari text-sm font-semibold text-amber-700/80 dark:text-amber-300/80">{item.shlok}</p>
+                      <h4 className="font-serif text-base font-bold text-amber-900 dark:text-amber-100">{item.title}</h4>
+                      <p className="text-sm text-gray-700 dark:text-stone-300 leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                    <p className="font-devanagari text-sm font-semibold text-amber-700/80 dark:text-amber-300/80">{item.shlok}</p>
-                    <h4 className="font-serif text-base font-bold text-amber-900 dark:text-amber-100">{item.title}</h4>
-                    <p className="text-sm text-gray-700 dark:text-stone-300 leading-relaxed">
-                      {item.desc}
-                    </p>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
           {/* AUDIO PODCASTS SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="podcast-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Podcasts
-            </h2>
-            <p className="text-center text-stone-500 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              Modern dialogues on ancient wisdom from world-renowned speakers and commentators.
-            </p>
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Podcasts
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 mb-12 italic text-sm">
+                Modern dialogues on ancient wisdom from world-renowned speakers and commentators.
+              </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {podcastCards.map((p, idx) => (
-                <a 
-                  key={idx}
-                  href={p.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white dark:bg-[#26160f] p-6 rounded-2xl border-2 border-stone-200 dark:border-amber-800 shadow-sm hover:border-[#ff0000] hover:scale-[1.03] transition-all flex flex-col justify-between gap-4 group"
-                >
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs font-bold text-red-600 uppercase tracking-widest bg-red-100 dark:bg-red-950/50 px-2 py-0.5 rounded">YouTube</span>
-                      <PlayCircle className="w-6 h-6 text-red-600 group-hover:scale-110 transition-transform" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {podcastCards.map((p, idx) => (
+                  <a 
+                    key={idx}
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 p-6 rounded-2xl border-2 border-amber-200 dark:border-amber-800 shadow-sm hover:border-amber-400 hover:scale-[1.03] transition-all flex flex-col justify-between gap-4 group"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-bold text-red-605 uppercase tracking-widest bg-red-105 dark:bg-red-950/50 px-2 py-0.5 rounded">YouTube</span>
+                        <PlayCircle className="w-6 h-6 text-red-600 group-hover:scale-110 transition-transform" />
+                      </div>
+                      <h3 className="font-serif text-sm text-[#8b4513] dark:text-[#ffd700] font-bold">{p.name}</h3>
+                      <p className="text-xs text-gray-650 dark:text-stone-300 line-clamp-3 leading-relaxed">
+                        {p.title}
+                      </p>
                     </div>
-                    <h3 className="font-serif text-sm text-[#8b4513] dark:text-[#ffd700] font-bold">{p.name}</h3>
-                    <p className="text-xs text-gray-600 dark:text-stone-300 line-clamp-3 leading-relaxed">
-                      {p.title}
-                    </p>
-                  </div>
-                  <span className="text-xs font-bold text-red-600 uppercase tracking-widest pt-2 border-t border-stone-100 dark:border-amber-950 flex items-center gap-1">
-                    Watch Video <ExternalLink className="w-3 h-3" />
-                  </span>
-                </a>
-              ))}
+                    <span className="text-xs font-bold text-[#8b4513] dark:text-amber-400 uppercase tracking-widest pt-2 border-t border-amber-100 dark:border-amber-955 flex items-center gap-1">
+                      Watch Video <ExternalLink className="w-3 h-3" />
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </section>
 
           {/* SACRED LITERATURE/BOOKS SECTION */}
           <section className="max-w-[1150px] mx-auto my-24 px-4" id="books-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Sacred Literature
-            </h2>
-            <p className="text-center text-stone-500 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              Deepen your search with world-renowned commentaries and translations.
-            </p>
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Sacred Literature
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 mb-12 italic text-sm">
+                Deepen your search with world-renowned commentaries and translations.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bookCards.map((b, idx) => (
-                <div 
-                  key={idx}
-                  className="bg-white dark:bg-[#26160f] p-6 rounded-2xl border-2 border-[#deb887] dark:border-amber-800 flex gap-4 items-start shadow-xs hover:shadow-md transition-all duration-300"
-                >
-                  <div className="text-4xl px-4 py-6 bg-stone-100 dark:bg-stone-900 rounded-xl border-l-[6px] border-[#8b4513] shadow-inner select-none flex items-center justify-center shrink-0">
-                    {b.cover}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {bookCards.map((b, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-[#fbf9f4] dark:bg-[#1b0f0a]/50 p-6 rounded-2xl border-2 border-amber-200 dark:border-amber-800 flex gap-4 items-start shadow-xs hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="text-4xl px-4 py-6 bg-stone-100 dark:bg-stone-900 rounded-xl border-l-[6px] border-[#8b4513] shadow-inner select-none flex items-center justify-center shrink-0">
+                      {b.cover}
+                    </div>
+                    <div className="space-y-2 flex-1">
+                      <span className="text-[10px] tracking-wider uppercase text-amber-800 dark:text-amber-400 font-bold">{b.author}</span>
+                      <h3 className="font-serif text-base text-[#8b4513] dark:text-[#ffd700] font-extrabold">{b.title}</h3>
+                      <p className="text-xs text-gray-600 dark:text-stone-300 leading-relaxed">
+                        {b.desc}
+                      </p>
+                      <a 
+                        href={b.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-block pt-2 text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline flex items-center gap-1"
+                      >
+                        <span>Purchase Book</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </div>
                   </div>
-                  <div className="space-y-2 flex-1">
-                    <span className="text-[10px] tracking-wider uppercase text-amber-800 dark:text-amber-400 font-bold">{b.author}</span>
-                    <h3 className="font-serif text-base text-[#8b4513] dark:text-[#ffd700] font-extrabold">{b.title}</h3>
-                    <p className="text-xs text-gray-600 dark:text-stone-300 leading-relaxed">
-                      {b.desc}
-                    </p>
-                    <a 
-                      href={b.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-block pt-2 text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline flex items-center gap-1"
-                    >
-                      <span>Purchase Book</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
           {/* FREQUENTLY ASKED QUESTIONS SECTION */}
-          <section className="max-w-[850px] mx-auto my-24 px-4" id="faq-section">
-            <h2 className="font-serif text-3xl sm:text-5xl text-center text-[#8b4513] dark:text-[#ffd700] uppercase tracking-wide">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-center text-stone-500 dark:text-stone-400 mt-2 mb-12 italic text-sm">
-              Clearing common doubts and inquiries about the Shrimad Bhagavad Gita.
-            </p>
+          <section className="max-w-[1150px] mx-auto my-24 px-4" id="faq-section">
+            <div className="bg-white dark:bg-[#26160f] border-2 border-amber-300/80 dark:border-amber-700/60 p-6 sm:p-12 md:p-16 rounded-3xl shadow-[0_15px_50px_rgba(245,158,11,0.12)] dark:shadow-[0_15px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-amber-400">
+              <h2 className="font-serif text-3xl sm:text-4xl text-center text-[#7c2d12] dark:text-[#ffd700] uppercase tracking-[3px] mb-2 select-none">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-center text-stone-600 dark:text-stone-300 mt-2 mb-12 italic text-sm">
+                Clearing common doubts and inquiries about the Shrimad Bhagavad Gita.
+              </p>
 
-            <div className="space-y-4">
-              {faqItems.map((faq, idx) => (
-                <div 
-                  key={idx}
-                  className="border border-[#deb887] dark:border-amber-800 rounded-xl overflow-hidden shadow-sm"
-                >
-                  <button 
-                    onClick={() => setActiveFaqIndex(activeFaqIndex === idx ? null : idx)}
-                    className="w-full text-left p-5 bg-[#fffdfa] dark:bg-[#26160f] flex justify-between items-center font-bold text-[#8b4513] dark:text-amber-300 font-serif focus:outline-none cursor-pointer hover:bg-stone-50"
+              <div className="space-y-4 max-w-4xl mx-auto">
+                {faqItems.map((faq, idx) => (
+                  <div 
+                    key={idx}
+                    className="border border-[#deb887] dark:border-amber-800 rounded-xl overflow-hidden shadow-sm"
                   >
-                    <span>{faq.question}</span>
-                    <ChevronDown className={`w-5 h-5 text-amber-600 dark:text-amber-400 transition-transform duration-250 ${activeFaqIndex === idx ? "rotate-180" : ""}`} />
-                  </button>
+                    <button 
+                      onClick={() => setActiveFaqIndex(activeFaqIndex === idx ? null : idx)}
+                      className="w-full text-left p-5 bg-[#fbf9f4] dark:bg-[#26160f] flex justify-between items-center font-bold text-[#8b4513] dark:text-amber-300 font-serif focus:outline-none cursor-pointer hover:bg-stone-50"
+                    >
+                      <span>{faq.question}</span>
+                      <ChevronDown className={`w-5 h-5 text-amber-600 dark:text-amber-400 transition-transform duration-250 ${activeFaqIndex === idx ? "rotate-180" : ""}`} />
+                    </button>
 
-                  <div className={`overflow-hidden transition-all duration-300 ${activeFaqIndex === idx ? "max-h-[300px]" : "max-h-0"}`}>
-                    <div className="p-5 bg-white dark:bg-[#1b0f0a] border-t border-amber-900/5 text-gray-700 dark:text-stone-300 text-sm leading-relaxed">
-                      {faq.answer}
+                    <div className={`overflow-hidden transition-all duration-300 ${activeFaqIndex === idx ? "max-h-[300px]" : "max-h-0"}`}>
+                      <div className="p-5 bg-white dark:bg-[#1b0f0a] border-t border-amber-900/5 text-gray-700 dark:text-stone-300 text-sm leading-relaxed">
+                        {faq.answer}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
 
