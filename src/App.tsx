@@ -559,7 +559,7 @@ export default function App() {
 
           {/* HERO GREETING BANNER WITH PARALLAX ATMOSPHERE */}
           <header className="relative w-full min-h-screen pt-[120px] pb-24 px-4 bg-cover bg-center flex flex-col justify-center items-center text-center overflow-hidden transition-all" id="hero-section"
-                  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1599733589046-9b8308b5b50d?auto=format&fit=crop&w=1500&q=80')` }}>
+                  style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.7)), url('images/battlefield.jpg')` }}>
             <div className="max-w-4xl mx-auto space-y-6 px-4 z-10">
               <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold text-[#ffd700] drop-shadow-lg leading-tight uppercase tracking-wide">
                 Shrimad Bhagavad Gita
@@ -659,7 +659,7 @@ export default function App() {
             <div className="flex justify-center mb-12">
               <div className="p-4 bg-white dark:bg-[#26160f] border-2 border-[#deb887] dark:border-amber-700 rounded-2xl shadow-md overflow-hidden max-w-lg">
                 <img 
-                  src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" 
+                  src="images/authors.jpg" 
                   alt="Ancient Sacred Art Representing Divine Dictation" 
                   className="w-full h-auto max-h-[300px] object-cover rounded-xl grayscale-[20%] hover:grayscale-0 transition-all"
                   referrerPolicy="no-referrer"
