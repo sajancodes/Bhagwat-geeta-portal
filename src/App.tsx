@@ -443,7 +443,10 @@ export default function App() {
     setChatLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || "https://bhagwat-geeta-portal.onrender.com";
+      const apiUrl = baseUrl.endsWith('/') ? `${baseUrl}api/chat` : `${baseUrl}/api/chat`;
+
+      const res = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
