@@ -1387,38 +1387,50 @@ export default function App() {
                               {/* Union Line 1: Parashara -> Satyavati */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
-                                <div className="absolute top-6 sm:top-7 -left-1 -right-1 h-0.5 bg-amber-500/70 z-0"></div>
+                                <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing to Satyavati --> */}
+                                <div className="absolute top-6 sm:top-7 -right-[30px] sm:-right-[40px] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] border-l-amber-500/70 z-10"></div>
                                 <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
                                 {/* Descent Line running all the way down to Vyasa */}
                                 <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing down */}
+                                <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
                               {/* 2. Queen Satyavati */}
-                              <div className="flex flex-col items-center">
+                              <div className="flex flex-col items-center relative z-10">
                                 {renderTreeCard("Satyavati", "Grand Mother", "Lineage Anchor", true)}
                               </div>
 
                               {/* Union Line 2: Satyavati <-> Shantanu */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
-                                <div className="absolute top-6 sm:top-7 -left-1 -right-1 h-0.5 bg-amber-500/70 z-0"></div>
+                                <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing to Satyavati <-- */}
+                                <div className="absolute top-6 sm:top-7 -left-[30px] sm:-left-[40px] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-r-[6px] border-r-amber-500/70 z-10"></div>
                                 <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
                                 {/* Descent Line running all the way down to Vichitravirya / Chitrangada */}
                                 <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing down */}
+                                <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
                               {/* 3. King Shantanu */}
-                              <div className="flex flex-col items-center">
+                              <div className="flex flex-col items-center relative z-10">
                                 {renderTreeCard("Shantanu", "Dynastic Ruler", "Hastinapura Crown")}
                               </div>
 
                               {/* Union Line 3: Shantanu <-> Ganga */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
-                                <div className="absolute top-6 sm:top-7 -left-1 -right-1 h-0.5 bg-amber-500/70 z-0"></div>
+                                <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing to Ganga --> */}
+                                <div className="absolute top-6 sm:top-7 -right-[30px] sm:-right-[40px] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] border-l-amber-500/70 z-10"></div>
                                 <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
                                 {/* Descent Line running all the way down to Bhishma */}
                                 <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Arrow pointing down */}
+                                <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
                               {/* 4. Goddess Ganga */}
@@ -1480,17 +1492,21 @@ export default function App() {
                                 {renderTreeCard("Vyasa", "Sage-Composer", "Son of Parashara & Satyavati", true)}
                               </div>
 
-                              {/* 2. Chitrangada */}
-                              <div className="flex flex-col items-center justify-center">
-                                {renderTreeCard("Chitrangada", "Kuru King Successor", "Fell Early in Battle")}
+                              {/* 2. Vichitravirya */}
+                              <div className="flex flex-col items-center justify-center relative">
+                                {renderTreeCard("Vichitravirya", "Late Successor", "Died of Sickness", true)}
+                                {/* Arrow pointing UP from Vichitravirya in the sketch */}
+                                <div className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-b-[6px] border-b-amber-500/70 z-10 hidden"></div>
                               </div>
 
                               {/* Spacer Column 4 */}
-                              <div></div>
+                              <div className="relative w-full h-[135px]">
+                                {/* Central line for Gen 2.5 Niyoga line passing through here */}
+                              </div>
 
-                              {/* 3. Vichitravirya */}
+                              {/* 3. Chitrangada */}
                               <div className="flex flex-col items-center justify-center">
-                                {renderTreeCard("Vichitravirya", "Late Successor", "Died of Sickness", true)}
+                                {renderTreeCard("Chitrangada", "Kuru King Successor", "Fell Early in Battle")}
                               </div>
 
                               {/* 4. Grand Bhishma */}
@@ -1511,199 +1527,172 @@ export default function App() {
                           </div>
 
                           {/* =================================================== */}
-                          {/* GEN II TO GEN III NIYOGA BRIDGES (VYASA + DECEASED HUSBAND VICHITRAVIRYA) */}
+                          {/* GEN II TO GEN III NIYOGA BRIDGES & QUEENS (VYASA + VICHITRAVIRYA) */}
                           {/* =================================================== */}
-                          <div className="bg-[#f0eae1] dark:bg-amber-950/20 p-5 rounded-2xl border border-dashed border-amber-900/10 flex flex-col items-center relative my-2">
-                            <span className="text-[10px] text-[#8b4513] dark:text-amber-400 font-black uppercase tracking-wider font-serif mb-2">
-                              🔮 THE SPIRITUAL ADOPTION BRIDGES (NIYOGA CONTRACTS)
-                            </span>
-                            <p className="text-[10px] text-stone-500 dark:text-stone-400 leading-normal text-center max-w-4xl">
-                              Following King Vichitravirya's childless death, Queen Mother Satyavati commanded Sage Vyasa to practice the sacred <strong>Niyoga</strong> spirit-unions with Vichitravirya’s childless widows, Queen Ambika and Queen Ambalika, to preserve the Kuru crown lineage.
-                            </p>
-
-                            <div className="flex flex-wrap items-center justify-center gap-8 mt-4 p-4 bg-white/70 dark:bg-black/40 rounded-2xl border border-amber-900/10 shadow-xs w-full max-w-4xl">
+                          
+                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] -my-2 h-12 relative z-0">
+                            
+                            {/* Col 2, 3, 4: Vyasa, Vichitravirya -> Queens */}
+                            <div className="col-span-3 col-start-2 relative h-12">
+                              {/* Horizontal line extending from Col 2 across Col 3 to Col 4 */}
+                              <div className="absolute left-[56px] sm:left-[64px] right-[56px] sm:right-[64px] top-6 h-0.5 bg-amber-500/70 z-0"></div>
                               
-                              {/* Left Actor: Vyasa (Spiritual Father) */}
-                              <div className="flex flex-col items-center">
-                                <span className="text-[10px] font-sans font-black text-amber-700 dark:text-amber-400 uppercase tracking-widest mb-1.5">Spiritual Father (Sire)</span>
-                                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-500/40 text-xs font-serif font-black text-[#8b4513] dark:text-amber-300 shadow-xs">
-                                  <span>✨</span> Sage Vyasa
-                                </div>
-                              </div>
-
-                              {/* Arrow Group 1: Niyoga Act */}
-                              <div className="flex flex-col items-center select-none">
-                                <span className="text-[8px] font-mono text-amber-700 font-bold uppercase tracking-widest bg-amber-100 dark:bg-amber-950/60 px-1.5 py-0.5 rounded">Niyoga Union</span>
-                                <div className="w-16 h-0.5 bg-amber-500/60 my-2 relative flex items-center justify-center">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
-                                </div>
-                                <span className="text-[8px] italic text-[#8b4513] dark:text-amber-400/80 text-center leading-none">Spiritual Blessing</span>
-                              </div>
-
-                              {/* Central Target: The Two Widows (Queens) */}
-                              <div className="flex flex-col gap-3">
-                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-100/30 dark:bg-amber-950/10 border border-amber-800/15 text-xs font-serif font-black text-stone-800 dark:text-stone-300">
-                                  👑 Queen Ambika <span className="text-[8.5px] text-stone-500 font-serif font-normal italic ml-1">(Produces Dhritarashtra)</span>
-                                </div>
-                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-100/30 dark:bg-amber-950/10 border border-amber-800/15 text-xs font-serif font-black text-stone-800 dark:text-stone-300">
-                                  👑 Queen Ambalika <span className="text-[8.5px] text-stone-500 font-serif font-normal italic ml-1">(Produces Pandu)</span>
-                                </div>
-                              </div>
-
-                              {/* Arrow Group 2: Nominal Marriage */}
-                              <div className="flex flex-col items-center select-none">
-                                <span className="text-[8px] font-mono text-stone-500 dark:text-stone-400 font-bold uppercase tracking-widest bg-stone-100 dark:bg-stone-900/60 px-1.5 py-0.5 rounded">Nominal Marriage</span>
-                                <div className="w-16 h-0.5 bg-stone-400/60 my-2 relative flex items-center justify-center">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-stone-400"></div>
-                                </div>
-                                <span className="text-[8px] italic text-stone-500 dark:text-stone-400/80 text-center leading-none">Sacred Legal Pact</span>
-                              </div>
-
-                              {/* Right Actor: Deceased Vichitravirya */}
-                              <div className="flex flex-col items-center">
-                                <span className="text-[10px] font-sans font-black text-rose-700 dark:text-rose-400 uppercase tracking-widest mb-1.5">Late King (First Husband)</span>
-                                <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-rose-50/80 dark:bg-red-950/30 border border-red-200/40 dark:border-red-900/20 text-xs font-serif font-black text-red-800 dark:text-red-300 shadow-xs">
-                                  💀 King Vichitravirya <span className="text-[9px] font-sans opacity-60">(Deceased)</span>
-                                </div>
-                              </div>
-
+                              {/* Drop from Vyasa (Left end of horizontal) */}
+                              <div className="absolute left-[56px] sm:left-[64px] -translate-x-1/2 top-0 h-6 w-0.5 bg-amber-500/70"></div>
+                              
+                              {/* Descent line to Ambika (Left end) */}
+                              <div className="absolute left-[56px] sm:left-[64px] -translate-x-1/2 top-6 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-[56px] sm:left-[64px] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                              
+                              {/* Drop from Vichitravirya (Center of span is naturally the center of Col 3!) */}
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 h-6 w-0.5 bg-amber-500/70"></div>
+                              
+                              {/* Descent line to Ambalika (Right end) */}
+                              <div className="absolute right-[56px] sm:right-[64px] translate-x-1/2 top-6 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 right-[56px] sm:right-[64px] translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                             </div>
+                            
                           </div>
 
                           {/* =================================================== */}
-                          {/* GENERATION 3: ROYAL QUEENS & THE CHIEF REHAB HOUSEHOLDS */}
+                          {/* GENERATION 3: ROYAL QUEENS */}
                           {/* =================================================== */}
                           <div className="relative pt-2">
-
-                            {/* Two-level structure inside Gen 3 for clean arrangement */}
-                            <div className="space-y-4 pt-4">
+                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-2 text-center">
                               
-                              {/* Sub-row 3A: Queens level */}
-                              <div className="grid grid-cols-[140px_90px_140px_40px_140px_90px_140px_90px_140px] items-start text-center justify-center mx-auto max-w-[1010px]">
-                                <div className="col-span-3 flex flex-col items-center justify-center">
-                                  {renderTreeCard("Ambika", "Princess of Kashi", "Closed eyes in fear")}
-                                </div>
-                                <div className="col-start-7 col-span-3 flex flex-col items-center justify-center">
-                                  {renderTreeCard("Ambalika", "Princess of Kashi", "Turned pale in shock")}
-                                </div>
+                              {/* Col 1 */}
+                              <div></div>
+
+                              {/* Col 2: Ambika */}
+                              <div className="flex flex-col items-center justify-center relative z-10">
+                                {renderTreeCard("Ambika", "Princess of Kashi", "Closed eyes in fear")}
                               </div>
 
-                              {/* Connectors down from Queens to the Parents */}
-                              <div className="grid grid-cols-[140px_90px_140px_40px_140px_90px_140px_90px_140px] -my-2 justify-center mx-auto max-w-[1010px]">
-                                <div className="col-start-2 flex justify-center">
-                                  <div className="h-10 w-0.5 bg-amber-500/70"></div>
-                                </div>
-                                <div className="col-start-8 flex justify-center">
-                                  <div className="h-10 w-0.5 bg-amber-500/70"></div>
-                                </div>
+                              {/* Col 3 */}
+                              <div></div>
+
+                              {/* Col 4: Ambalika */}
+                              <div className="flex flex-col items-center justify-center relative z-10">
+                                {renderTreeCard("Ambalika", "Princess of Kashi", "Turned pale in shock")}
                               </div>
 
-                              {/* Sub-row 3B: Blind Sovereign & The Hermit Households */}
-                              <div className="grid grid-cols-[140px_90px_140px_40px_140px_90px_140px_90px_140px] items-start text-center justify-center mx-auto max-w-[1010px]">
-                                
-                                {/* A. Dhritarashtra */}
-                                <div className="flex flex-col items-center justify-center col-start-1">
-                                  {renderTreeCard("Dhritarashtra", "The King Regent", "Eldest son born of Ambika")}
-                                </div>
+                              {/* Col 5, 6, 7 Empty */}
+                              <div className="col-span-3"></div>
+                            </div>
+                          </div>
 
-                                {/* Link: Dhritarashtra <---> Gandhari */}
-                                <div className="relative w-full h-[135px] col-start-2">
-                                  {/* Horizontal line at photo level */}
-                                  <div className="absolute top-6 sm:top-7 -left-[40px] -right-[40px] h-0.5 bg-amber-500/70 z-0"></div>
-                                  <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
-                                  {/* Incoming vertical line from Ambika lands exactly on the midpoint */}
-                                  <div className="absolute top-0 bottom-[107px] left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
-                                  {/* Descent line to Kauravas starting at midpoint and running to the bottom of the row */}
-                                  <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
-                                </div>
+                          {/* Descent from Ambika and Ambalika down to Dhritarashtra and Pandu */}
+                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] -my-2 h-12 relative z-0">
+                            {/* Descent from Ambika (Col 2) */}
+                            <div className="col-start-2 relative">
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                            </div>
+                            {/* Descent from Ambalika (Col 4) */}
+                            <div className="col-start-4 relative">
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                            </div>
+                          </div>
 
-                                {/* B. Gandhari */}
-                                <div className="flex flex-col items-center justify-center col-start-3">
+                          {/* Sub-row 3B / GEN 4: The Core Households */}
+                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start text-center pt-2">
+                            
+                            {/* Col 1: Gandhari */}
+                                <div className="flex flex-col items-center justify-center relative z-10">
                                   {renderTreeCard("Gandhari", "Queen Empress", "Blindfolded out of devotion")}
                                 </div>
 
-                                {/* Gap separator column */}
-                                <div></div>
+                                {/* Col 1 & 2 Gap: Gandhari & Dhritarashtra */}
+                                <div className="relative w-full h-[135px]">
+                                  <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                  <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
+                                  <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
+                                </div>
 
-                                {/* C. Kunti */}
-                                <div className="flex flex-col items-center justify-center col-start-5">
+                                {/* Col 2: Dhritarashtra */}
+                                <div className="flex flex-col items-center justify-center relative z-10">
+                                  {renderTreeCard("Dhritarashtra", "The King Regent", "Eldest son born of Ambika")}
+                                </div>
+
+                                {/* Col 3: Kunti */}
+                                <div className="flex flex-col items-center justify-center relative z-10">
                                   {renderTreeCard("Kunti", "Empress Dowager", "First Consort of Pandu", true)}
                                 </div>
 
-                                {/* Marriage: Kunti <---> Pandu */}
-                                <div className="relative w-full h-[135px] col-start-6">
-                                  {/* Horizontal line at photo level */}
-                                  <div className="absolute top-6 sm:top-7 -left-[40px] -right-[40px] h-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Col 3 & 4 Gap: Kunti & Pandu */}
+                                <div className="relative w-full h-[135px]">
+                                  <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                  {/* Arrows pointing FROM Pandu to Kunti and Madri */}
+                                  <div className="absolute top-6 sm:top-7 -right-[30px] sm:-right-[40px] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-r-[6px] border-r-amber-500/70 z-10"></div>
                                   <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
-                                  {/* Descent line of Pandavas running down to bottom of row */}
                                   <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
                                 </div>
 
-                                {/* D. Pandu */}
-                                <div className="flex flex-col items-center justify-center col-start-7">
+                                {/* Col 4: Pandu */}
+                                <div className="flex flex-col items-center justify-center relative z-10">
                                   {renderTreeCard("Pandu", "The Pale Sovereign", "Second son born of Ambalika")}
                                 </div>
 
-                                {/* Marriage: Pandu <---> Madri */}
-                                <div className="relative w-full h-[135px] col-start-8">
-                                  {/* Horizontal line at photo level */}
-                                  <div className="absolute top-6 sm:top-7 -left-[40px] -right-[40px] h-0.5 bg-amber-500/70 z-0"></div>
+                                {/* Col 4 & 5 Gap: Pandu & Madri */}
+                                <div className="relative w-full h-[135px]">
+                                  <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
+                                  {/* Arrow pointing FROM Pandu to Madri */}
+                                  <div className="absolute top-6 sm:top-7 -left-[30px] sm:-left-[40px] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] border-l-amber-500/70 z-10"></div>
                                   <div className="absolute top-6 sm:top-7 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 border border-[#faf6ee] dark:border-[#1a110a] z-10 shadow-xs"></div>
-                                  {/* Incoming vertical line from Ambalika lands exactly on the midpoint */}
-                                  <div className="absolute top-0 bottom-[107px] left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
-                                  {/* Descent line to twin Pandavas running down from midpoint to bottom of row */}
                                   <div className="absolute top-6 sm:top-7 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-amber-500/70"></div>
                                 </div>
 
-                                {/* E. Madri */}
-                                <div className="flex flex-col items-center justify-center col-start-9">
+                                {/* Col 5: Madri */}
+                                <div className="flex flex-col items-center justify-center relative z-10">
                                   {renderTreeCard("Madri", "Second Consort", "Mother of handsome twins")}
                                 </div>
-
                               </div>
 
-                            </div>
-                          </div>
-
                           {/* =================================================== */}
-                          {/* GEN III TO GEN IV: THE DETAILED FACTION CORES DESCENT */}
+                          {/* GEN IV TO GEN V: DESCENT PATHS */}
                           {/* =================================================== */}
-                          <div className="grid grid-cols-[140px_90px_140px_40px_140px_90px_140px_90px_140px] items-start justify-center mx-auto max-w-[1010px] h-10 relative">
+                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start justify-center text-center -my-2 h-12 relative z-0">
                             {/* 1. Kaurava faction drop */}
-                            <div className="col-start-2 flex justify-center h-full">
-                              <div className="w-0.5 bg-rose-500 h-full"></div>
+                            <div className="relative h-full" style={{ gridColumnStart: 2 }}>
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                             </div>
 
                             {/* 2. Kunti premarital solar line to Karna */}
-                            <div className="col-start-5 flex justify-center h-full">
-                              <div className="w-0.5 bg-orange-500 border-l border-dashed h-full"></div>
+                            <div className="relative h-full" style={{ gridColumnStart: 3 }}>
+                              {/* Karna drop directly from Kunti */}
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70 border-l border-dashed border-amber-500"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                             </div>
 
                             {/* 3. Kunti-Pandu union drop to 3 Pandavas */}
-                            <div className="col-start-6 flex justify-center h-full">
-                              <div className="w-0.5 bg-emerald-500 h-full"></div>
+                            <div className="relative h-full" style={{ gridColumnStart: 4 }}>
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                             </div>
 
                             {/* 4. Pandu-Madri union drop to Twin Pandavas */}
-                            <div className="col-start-8 flex justify-center h-full">
-                              <div className="w-0.5 bg-blue-500 h-full"></div>
+                            <div className="relative h-full" style={{ gridColumnStart: 6 }}>
+                              <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
+                              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                             </div>
                           </div>
 
                           {/* =================================================== */}
-                          {/* GENERATION 4: THE EPIC contestants & HERO WARRIORS */}
+                          {/* GENERATION 5: THE EPIC HEROES & WARRIORS */}
                           {/* =================================================== */}
                           <div className="relative pt-4">
 
-                            <div className="grid grid-cols-[140px_90px_140px_40px_140px_90px_140px_90px_140px] items-start justify-center mx-auto max-w-[1010px] pt-2">
+                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-2">
                               
-                              {/* Group A: The Kaurava Brothers Block (Columns 1-3) */}
-                              <div className="col-start-1 col-span-3 bg-[#fff3f0]/60 dark:bg-red-950/10 p-3 rounded-2xl border border-red-500/15 flex flex-col items-center">
-                                <div className="flex flex-wrap gap-2 justify-center">
-                                  {renderTreeCard("Duryodhana", "Eldest Kaurava", "Highly Ambitious Antagonist", true)}
+                              {/* Group A: The Kaurava Brothers Block (Columns 1-2) */}
+                              <div className="col-start-1 col-span-2 bg-[#fff3f0]/60 dark:bg-red-950/10 p-3 rounded-2xl border border-red-500/15 flex flex-col items-center">
+                                <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center">
+                                  {renderTreeCard("Duryodhan", "Eldest Kaurava", "Highly Ambitious", true)}
                                   {renderTreeCard("Vikarna", "The Righteous", "Defended Draupadi")}
-                                  {renderTreeCard("Dushasana", "Second Brother", "Aggressive General")}
                                   {renderTreeCard("Duhsala", "Beloved Sister", "Hastinapura Princess")}
+                                  {renderTreeCard("Dushasana", "Second Brother", "Aggressive General")}
                                   <div className="w-24 bg-stone-50 dark:bg-[#120a07] border border-stone-200 dark:border-stone-850 rounded-xl p-2 text-center opacity-65 shrink-0 flex flex-col justify-center items-center h-[135px]">
                                     <span className="text-lg">🤝</span>
                                     <span className="font-serif text-[10px] font-black text-stone-500 mt-1">96 Others</span>
@@ -1712,28 +1701,25 @@ export default function App() {
                                 </div>
                               </div>
 
-                              {/* Spacer column (Col 4) */}
-                              <div></div>
-
-                              {/* Group B: Tragic Solar Hero Karna (Column 5) */}
-                              <div className="col-start-5 flex flex-col items-center p-2 bg-orange-50/30 rounded-xl border border-orange-500/10">
-                                {renderTreeCard("Karna", "Solar Archer", "Kunti's Hidden Gem", true)}
+                              {/* Group B: Karna under Kunti (Column 3) */}
+                              <div className="col-start-3 flex flex-col items-center justify-center p-2">
+                                {renderTreeCard("Karn", "Solar Archer", "Kunti's Hidden Gem", true)}
                               </div>
 
-                              {/* Group C: 3 Elder Pandavas via Kunti (Columns 6-7) */}
-                              <div className="col-start-6 col-span-2 bg-[#f0faf2]/60 dark:bg-emerald-950/10 p-3 rounded-2xl border border-emerald-500/15 flex flex-col items-center gap-1">
-                                <div className="flex gap-2 justify-center">
-                                  {renderTreeCard("Yudhisthira", "Dharmaraja King", "Eldest Truth-Champion")}
-                                  {renderTreeCard("Bheema", "Fierce Mighty", "Absolute Strongest Warrior", true)}
-                                  {renderTreeCard("Arjuna", "Master Archer", "Hero who listened to Gita", true)}
+                              {/* Group C: 3 Elder Pandavas via Kunti (Column 4) */}
+                              <div className="col-start-4 bg-[#f0faf2]/60 dark:bg-emerald-950/10 p-3 rounded-2xl border border-emerald-500/15 flex flex-col items-center">
+                                <div className="flex flex-col gap-2 justify-center">
+                                  {renderTreeCard("Yudhistra", "Dharmaraja King", "Eldest Truth-Champion")}
+                                  {renderTreeCard("Bheem", "Fierce Mighty", "Strongest Warrior", true)}
+                                  {renderTreeCard("Arjun", "Master Archer", "Hero of the Gita", true)}
                                 </div>
                               </div>
 
-                              {/* Group D: 2 Twin Pandavas via Madri (Columns 8-9) */}
-                              <div className="col-start-8 col-span-2 bg-[#f0f5fa]/60 dark:bg-blue-950/10 p-3 rounded-2xl border border-blue-500/15 flex flex-col items-center gap-1">
+                              {/* Group D: 2 Twin Pandavas via Madri (Column 6 & 7) */}
+                              <div className="col-start-6 col-span-2 bg-[#f0f5fa]/60 dark:bg-blue-950/10 p-3 rounded-2xl border border-blue-500/15 flex flex-col items-center">
                                 <div className="flex gap-2 justify-center">
                                   {renderTreeCard("Nakula", "Master Sword", "Elegance & Horse Seer")}
-                                  {renderTreeCard("Sahadeva", "Divine Seer", "Astrology strategist")}
+                                  {renderTreeCard("Sahadev", "Divine Seer", "Astrology strategist")}
                                 </div>
                               </div>
 
@@ -1743,143 +1729,118 @@ export default function App() {
                           {/* =================================================== */}
                           {/* GEN IV TO GEN V: MATRIMONIAL ALLIANCES & MATOR DESCENTS */}
                           {/* =================================================== */}
-                          <div className="bg-[#fdfaf2] dark:bg-amber-950/10 p-4 rounded-2xl border border-amber-900/10 grid grid-cols-3 gap-6 my-1">
+                          <div className="bg-[#f0eae1] dark:bg-amber-950/20 p-5 rounded-2xl border border-amber-900/10 grid grid-cols-3 gap-8 my-4 mt-8 relative">
                             
-                            {/* 1. Duryodhana x Bhanumati Descent */}
-                            <div className="flex flex-col items-center border-r border-amber-900/10 pr-4">
-                              <span className="text-[#8b4513] text-[9.5px] font-bold uppercase tracking-wider mb-2 font-serif flex items-center gap-1">
-                                ⚔️ Kaurava Crown Alliance
-                              </span>
-                              <div className="flex items-center">
-                                <div className="text-[10px] text-stone-500 font-serif font-black pr-2 select-none">Duryodhana</div>
-                                <div className="w-10 h-0.5 bg-amber-500/70 -mr-2 relative z-0"></div>
-                                {renderTreeCard("Bhanumati", "Chief Queen", "Wife of Duryodhana")}
-                              </div>
-                              <div className="h-8 w-0.5 bg-amber-500/70"></div>
-                            </div>
-
-                            {/* 2. Bheema x Hidimbi Union */}
-                            <div className="flex flex-col items-center border-r border-amber-900/10 pr-4">
-                              <span className="text-amber-800 text-[9.5px] font-bold uppercase tracking-wider mb-2 font-serif flex items-center gap-1">
-                                👹 Tribal Queen Alliance
-                              </span>
-                              <div className="flex items-center">
-                                <div className="text-[10px] text-stone-500 font-serif font-black pr-2 select-none">Bheema</div>
-                                <div className="w-10 h-0.5 bg-amber-500/70 -mr-2 relative z-0"></div>
-                                {renderTreeCard("Hidimbi", "Native Forest Queen", "Mighty Wife of Bheema")}
-                              </div>
-                              <div className="h-8 w-0.5 bg-amber-500/70"></div>
-                            </div>
-
-                            {/* 3. Arjuna x Subhadra union */}
+                            {/* 1. Duryodhana Line */}
                             <div className="flex flex-col items-center">
-                              <span className="text-amber-500 text-[9.5px] font-bold uppercase tracking-wider mb-2 font-serif flex items-center gap-1">
-                                🕊️ Yadava Faction Link
-                              </span>
-                              <div className="flex items-center">
-                                <div className="text-[10px] text-stone-500 font-serif font-black pr-2 select-none">Arjuna</div>
-                                <div className="w-10 h-0.5 bg-amber-500/70 -mr-2 relative z-0"></div>
-                                {renderTreeCard("Subhadra", "Yadava Princess", "Krishna's Sister")}
-                              </div>
-                              <div className="h-8 w-0.5 bg-amber-500/70"></div>
-                            </div>
-
-                          </div>
-
-                          {/* =================================================== */}
-                          {/* GENERATION 5: NEXT GENERATION & ALLIANCE MARRIAGES */}
-                          {/* =================================================== */}
-                          <div className="relative pt-6">
-
-                            {/* Layout of Next Gen characters */}
-                            <div className="grid grid-cols-[1fr_120px_1fr_120px_1fr] items-center text-center pt-4">
-                              
-                              {/* 1. Duryodhana's Heirs */}
-                              <div className="flex flex-col items-center gap-1.5 bg-rose-50/20 p-3 rounded-2xl border border-rose-900/10">
-                                <div className="flex gap-2">
-                                  {renderTreeCard("Lakshman", "Valiant Prince", "Fell on battlefield")}
-                                  {renderTreeCard("Lakshmana", "Duryodhana's girl", "Wed to Krishna's son")}
+                              {/* Duryodhan <-> Bhanumati */}
+                              <div className="flex items-center justify-center w-full relative">
+                                {renderTreeCard("Duryodhan", "Eldest Kaurava", "")}
+                                <div className="w-12 h-0.5 bg-amber-500/70 relative">
+                                  {/* Double Arrow */}
+                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
                                 </div>
-                              </div>
-
-                              {/* Inter-Alliances connector 1 */}
-                              <div className="flex flex-col items-center justify-center relative w-full px-1">
-                                <span className="text-[8px] font-sans bg-amber-150 text-[#8b4513] uppercase font-black tracking-widest leading-none mb-1">Romance Union</span>
-                                <div className="w-[calc(100%+80px)] -mx-[40px] h-0.5 bg-[#8b4513]/50 relative z-0 flex items-center justify-center">
-                                  <div className="w-2 h-2 rounded-full bg-amber-600"></div>
-                                </div>
-                              </div>
-
-                              {/* 2. Ghatotkacha (Bheema's son) & Abhimanyu */}
-                              <div className="flex flex-col items-center gap-4">
-                                <div className="flex items-center gap-4">
-                                  <div className="flex flex-col items-center">
-                                    <div className="w-24 bg-stone-50 dark:bg-[#120a07] border border-amber-900/10 rounded-xl p-1.5 text-center shrink-0 h-[135px] flex flex-col justify-center items-center relative z-10">
-                                      <span className="text-xl">👹</span>
-                                      <h5 className="font-serif text-[10px] font-black text-stone-500 mt-1">Ghatotkacha</h5>
-                                      <p className="text-[8.5px] text-stone-400 mt-0.5">Generous Martyr</p>
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="flex flex-col items-center pt-2">
-                                    {renderTreeCard("Abhimanyu", "Valiant Martyr", "Shattered Chakravyuha", true)}
-                                  </div>
-                                </div>
-                              </div>
-
-                              {/* Inter-Alliances connector 2 */}
-                              <div className="flex flex-col items-center justify-center relative w-full px-1">
-                                <span className="text-[8.5px] font-sans bg-amber-150 text-[#8b4513] uppercase font-black tracking-widest leading-none mb-1">Marriage Alliance</span>
-                                <div className="w-[calc(100%+80px)] -mx-[40px] h-0.5 bg-[#8b4513]/50 relative z-0 flex items-center justify-center">
-                                  <div className="w-2 h-2 rounded-full bg-amber-600"></div>
-                                </div>
-                              </div>
-
-                              {/* 3. Outside Spouses */}
-                              <div className="flex flex-col gap-3">
-                                <div className="bg-amber-50/40 p-2.5 rounded-xl border border-amber-600/15 flex flex-col items-center">
-                                  {renderTreeCard("Sambha", "Shri Krishna's Son", "Wife is Kuru-born")}
-                                </div>
+                                {renderTreeCard("Bhanumati", "Chief Queen", "")}
                                 
-                                <div className="bg-emerald-50/40 p-2.5 rounded-xl border border-emerald-600/15 flex flex-col items-center">
-                                  {renderTreeCard("Uttara", "Matsya Princess", "Wife of Abhimanyu")}
-                                </div>
+                                {/* Drop down line */}
+                                <div className="absolute top-[80px] left-[50%] w-0.5 h-6 bg-amber-500/70"></div>
+                                <div className="absolute top-[104px] left-[50%] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
+                              {/* Descendants */}
+                              <div className="flex items-center justify-center w-full mt-8 relative">
+                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-2 text-center shadow-xs">
+                                  <strong className="text-xs text-[#8b4513] font-serif">Lakshman, Lakshmana</strong>
+                                </div>
+                                <div className="w-12 h-0.5 bg-amber-500/70 flex-shrink-0 relative">
+                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
+                                </div>
+                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-2 text-center shadow-xs">
+                                  <span className="text-[10px] text-stone-500">Krishna's son</span>
+                                  <br/>
+                                  <strong className="text-xs text-[#8b4513] font-serif">Sambha</strong>
+                                </div>
+                              </div>
                             </div>
+
+                            {/* 2. Bheem Line (Hidimbi points to Bheem? No, Bheem to Hidimbi) */}
+                            <div className="flex flex-col items-center">
+                              {/* Bheem -> Hidimbi */}
+                              <div className="flex items-center justify-center w-full relative">
+                                {renderTreeCard("Bheem", "Pandava", "")}
+                                <div className="w-12 h-0.5 bg-amber-500/70 flex-shrink-0 relative">
+                                  {/* Right pointing arrow */}
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
+                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
+                                </div>
+                                {renderTreeCard("Hidimbi", "Demoness", "")}
+                              </div>
+                            </div>
+
+                            {/* 3. Arjun Line */}
+                            <div className="flex flex-col items-center">
+                              {/* Arjun <-> Subadhra */}
+                              <div className="flex items-center justify-center w-full relative">
+                                {renderTreeCard("Arjun", "Pandava", "")}
+                                <div className="w-12 h-0.5 bg-amber-500/70 flex-shrink-0 relative">
+                                  {/* Double Arrow */}
+                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
+                                </div>
+                                {renderTreeCard("Subadhra", "Yadava", "")}
+                                
+                                {/* Drop down line */}
+                                <div className="absolute top-[80px] left-[50%] w-0.5 h-6 bg-amber-500/70"></div>
+                                <div className="absolute top-[104px] left-[50%] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                              </div>
+
+                              {/* Descendants */}
+                              <div className="flex items-center justify-center w-full mt-8 relative">
+                                {renderTreeCard("Abhimanyu", "Warrior", "")}
+                                <div className="w-12 h-0.5 bg-amber-500/70 flex-shrink-0 relative">
+                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
+                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
+                                </div>
+                                {renderTreeCard("Uttara", "Princess", "")}
+                              </div>
+                            </div>
+                            
                           </div>
 
                           {/* =================================================== */}
                           {/* GEN VII LEVEL: ULTIMATE SURVING HEIR & DYNASTIC SEED */}
                           {/* =================================================== */}
-                          <div className="border-t border-dashed border-amber-900/20 pt-8 mt-2 flex flex-col items-center">
+                          <div className="border-t border-dashed border-amber-900/20 pt-8 mt-6 flex flex-col items-center">
                             <h4 className="text-xs font-serif font-black tracking-[4px] text-amber-850 dark:text-amber-300 uppercase mb-4">
-                              👑 COGNATE DYNASTY SEED CONTINUATION
+                              👑 SEED CONTINUATION
                             </h4>
                             
                             <div className="flex flex-col items-center">
-                              <span className="text-[9px] text-[#8b4513] font-serif uppercase tracking-widest font-black text-center mb-1 bg-[#deb887]/20 px-4 py-1 rounded-full">
-                                Surviving descendant of the whole Mahabharat War
-                              </span>
                               
-                              <div className="flex items-center justify-center relative w-full h-8">
-                                <div className="text-stone-500 text-[10px] font-black uppercase font-serif pr-2 select-none">Abhimanyu</div>
-                                <div className="w-20 h-0.5 bg-amber-600/70 relative flex items-center justify-center z-0">
-                                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
-                                </div>
-                                <div className="text-stone-500 text-[10px] font-black uppercase font-serif pl-2 select-none">Uttara</div>
+                              <div className="flex flex-col items-center justify-center relative w-full h-8">
+                                <span className="text-stone-500 text-[10px] lowercase italic font-serif">Descent from Abhimanyu & Uttara</span>
                               </div>
 
                               {/* Downward Connector Line */}
-                              <div className="h-10 w-0.5 bg-amber-600 -mt-1 mb-1"></div>
-
-                              <div className="bg-[#fffdf2] dark:bg-amber-950/20 p-4 rounded-3xl border-4 border-double border-amber-600 max-w-[340px] text-center shadow-[0_10px_25px_rgba(217,119,6,0.06)] scale-102 hover:scale-105 transition-transform duration-300">
-                                <span className="text-xl block select-none">👑</span>
-                                <h4 className="font-serif text-[#8b4513] dark:text-amber-300 text-xs font-black uppercase tracking-widest mt-1">KING PARIKSHIT</h4>
-                                <p className="text-[9px] text-stone-500 dark:text-stone-400 mt-1 leading-snug">
-                                  Heir in womb of Uttara who survived the Brahmashira weapon. He rebuilt the golden Kingdom of Hastinapura and preserved the light of the Kuru seed for generations.
-                                </p>
+                              <div className="h-6 w-0.5 bg-amber-600 relative">
+                                <div className="absolute bottom-[-1px] left-[50%] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-600 z-10"></div>
                               </div>
+
+                              <div className="bg-[#fffdf2] dark:bg-amber-950/20 p-4 rounded-3xl border-2 border-amber-600 max-w-[200px] text-center shadow-[0_10px_25px_rgba(217,119,6,0.06)] hover:scale-105 transition-transform duration-300 mt-2">
+                                <h4 className="font-serif text-[#8b4513] dark:text-amber-300 text-xs font-black uppercase tracking-widest mt-1">PARIKSHIT</h4>
+                              </div>
+
+                              {/* Downward Connector Line */}
+                              <div className="h-8 w-0.5 bg-amber-600 relative">
+                                <div className="absolute bottom-[-1px] left-[50%] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-600 z-10"></div>
+                              </div>
+
+                              <div className="bg-stone-50 dark:bg-[#1f1611]/80 p-4 rounded-3xl border border-stone-200 dark:border-stone-800 max-w-[200px] text-center shadow-xs hover:scale-105 transition-transform duration-300 mt-0">
+                                <h4 className="font-serif text-stone-700 dark:text-stone-300 text-[11px] font-black uppercase tracking-widest mt-1">Janamejaya</h4>
+                              </div>
+                              
                             </div>
                           </div>
 
