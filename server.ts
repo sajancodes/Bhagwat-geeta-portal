@@ -30,7 +30,7 @@ async function startServer() {
         return;
       }
 
-      const nvidiaApiKey = process.env.NVIDIA_API_KEY || "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";
+      const nvidiaApiKey = process.env.NVIDIA_API_KEY || "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";
       const invokeUrl = "https://integrate.api.nvidia.com/v1/chat/completions";
 
       // Lord Krishna prompt setup
@@ -50,12 +50,13 @@ Guidelines for your divine response:
       ];
 
       const payload = {
-        model: "meta/llama-3.1-8b-instruct",
+        model: "google/gemma-4-31b-it",
         messages: formattedMessages,
-        max_tokens: 2048,
-        temperature: 0.7,
+        max_tokens: 16384,
+        temperature: 1.0,
         top_p: 0.95,
         stream: false,
+        chat_template_kwargs: { enable_thinking: true }
       };
 
       const response = await fetch(invokeUrl, {
