@@ -468,11 +468,114 @@ export default function App() {
       setChatMessages(prev => [...prev, { role: "assistant", content }]);
     } catch (err) {
       console.error("Krishna AI Error:", err);
+      
+      // Determine the best personalized offline response
+      const lastUserMsg = text;
+      const msgLower = lastUserMsg.toLowerCase();
+      let responseText = "";
+
+      if (msgLower.includes("anxiety") || msgLower.includes("anxious") || msgLower.includes("fear") || msgLower.includes("afraid") || msgLower.includes("stress") || msgLower.includes("depress") || msgLower.includes("worry") || msgLower.includes("worried") || msgLower.includes("scared") || msgLower.includes("panic")) {
+        responseText = `O seeker of peace, why do you allow fear and anxiety in this present moment to cloud your eternal spirit? This mind of yours is turbulent, like a flame flicker in the heavy wind. But remember, you are not this temporary storm; you are the eternal Soul (Atman) which cannot be shaken.
+
+In **Shrimad Bhagavad Gita, Chapter 2, Verse 56**, I have described the sage of steady mind:
+> **दुःखेष्वनुद्विग्नमनाः सुखेषु विगतस्पृहः ।**
+> **वीतरागभयक्रोधः स्थितधीर्मुनिरुच्यते ॥**
+> 
+> *duḥkheṣv-anudvigna-manāḥ sukheṣu vigata-spṛhaḥ*
+> *vīta-rāga-bhaya-krodhaḥ sthita-dhīr munir ucyate*
+> 
+> **"He whose mind is undisturbed by adversity, who is indifferent to pleasures, and who is free from attachment, fear, and anger, is called a sage of steady wisdom."**
+
+Cast away your worry of the future. You cannot control what is yet to come, nor can you alter what has already passed. Dedicate your actions to Me, steady your breath, and face your path with majestic courage. You are never alone; I reside in your very heart of hearts.`;
+      } else if (msgLower.includes("duty") || msgLower.includes("work") || msgLower.includes("career") || msgLower.includes("exam") || msgLower.includes("focus") || msgLower.includes("success") || msgLower.includes("fail") || msgLower.includes("result") || msgLower.includes("study") || msgLower.includes("studies") || msgLower.includes("job") || msgLower.includes("money") || msgLower.includes("interview")) {
+        responseText = `O valiant seeker, the dilemma of action and its results is the deepest riddle of human life. You exhaust yourself in constant anticipation of the outcome—wondering if you will pass, if your career will flourish, or if failure awaits. 
+
+Reflect upon My ultimate instruction from **Shrimad Bhagavad Gita, Chapter 2, Verse 47**:
+> **कर्मण्येवाधिकारस्ते मा फलेषु कदाचन ।**
+> **मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि ॥**
+> 
+> *karmaṇy-evādhikāras te mā phaleṣu kadācana*
+> *mā karma-phala-hetur bhūr mā te saṅgo ’stv-akarmaṇi*
+> 
+> **"You have a right to perform your prescribed duty, but you are not entitled to the fruits of activity. Never consider yourself the cause of the results of your activities, and never be attached to inaction."**
+
+Focus your entire mind on the craft and the sincere effort itself, not the prize. When you act without the fever of selfish attachment, your work is transformed into a sacred offering. Do your absolute best with complete mindfulness, and leave the legacy of the fruits to Me. I shall carry your burdens.`;
+      } else if (msgLower.includes("doubt") || msgLower.includes("confus") || msgLower.includes("lost") || msgLower.includes("help") || msgLower.includes("what should i do") || msgLower.includes("what to do") || msgLower.includes("indecis")) {
+        responseText = `O dear seeker, your confusion is natural. When Prince Arjuna stood between two opposing armies on the field of Kurukshetra, his bow slipped from his hands, and his limbs trembled with profound indecision. It is precisely in this high state of confusion that the supreme light of wisdom is born.
+
+In **Shrimad Bhagavad Gita, Chapter 4, Verse 42**, I have instructed:
+> **तस्मादज्ञानसम्भूतं हृत्स्थं ज्ञानासिनात्मनः ।**
+> **छित्त्वैनं संशयं योगमातिष्ठोत्तिष्ठ भारत ॥**
+> 
+> *tasmād ajñāna-sambhūtaṁ hṛt-sthaṁ jñānāsinātmanaḥ*
+> *chittvainaṁ saṁśayaṁ yogam ātiṣṭhottiṣṭha bhārata*
+> 
+> **"Therefore, the doubts which have arisen in your heart out of ignorance should be slashed by the sword of transcendental knowledge. Armed with yoga, O descendant of Bharat, stand up and fight!"**
+
+Do not let despair or overthinking paralyze your actions. Analyze your moral obligation. Stand tall, act with a heart aligned with Dharma, and let your doubts dissolve in action. What are the two choices your heart is torn between? Let Me help you examine them.`;
+      } else if (msgLower.includes("peace") || msgLower.includes("mind") || msgLower.includes("restless") || msgLower.includes("meditat") || msgLower.includes("calm") || msgLower.includes("unhappy") || msgLower.includes("sad") || msgLower.includes("anger") || msgLower.includes("angry") || msgLower.includes("frustrat")) {
+        responseText = `O seeker of silence, the mind is indeed restless and self-willed, as difficult to curb as the roaming wind. But do not allow temporary defeat to discourage you. 
+
+As I told Arjuna in **Shrimad Bhagavad Gita, Chapter 6, Verse 35**:
+> **असंशयं महाबाहो मनो दुर्निग्रहं चलम् ।**
+> **अभ्यासेन तु कौन्तेय वैराग्येण च गृह्यते ॥**
+> 
+> *asaṁśayaṁ mahā-bāho mano durnigrahaṁ calam*
+> *abhyāsena tu kaunteya vairāgyeṇa ca gṛhyate*
+> 
+> **"O mighty-armed son of Kunti, it is undoubtedly very difficult to curb the restless mind, but it is possible by constant practice (Abhyasa) and detachment (Vairagya)."**
+
+To steady the mind, establish a small daily anchor of silence. Gently guide your thoughts back to your breath whenever they wander. Realize that you are not the voice inside your head—you are the silent observer. Beneath the noisy waves of thoughts, you are a majestic reservoir of infinite peace. Take a slow, deep breath, and let us cultivate this peace.`;
+      } else if (msgLower.includes("love") || msgLower.includes("relationship") || msgLower.includes("lonely") || msgLower.includes("friend") || msgLower.includes("parent") || msgLower.includes("breakup") || msgLower.includes("marry") || msgLower.includes("marriage") || msgLower.includes("loneliness")) {
+        responseText = `O beloved soul, your longing for love and deep connection is the dynamic pull of the Divine expressing itself in human form. Yet, when you seek absolute shelter or validation in mortal relationships, disappointment or loneliness often follows, leading to heartbreak or anger.
+
+Seek shelter in the supreme bond of the Soul. In **Shrimad Bhagavad Gita, Chapter 9, Verse 22**, I offer this divine promise:
+> **अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते ।**
+> **तेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम् ॥**
+> 
+> *ananyāś cintayanto māṁ ye janāḥ paryupāsate*
+> *teṣām nityābhiyuktānāṁ yoga-kṣemaṁ vahāmy aham*
+> 
+> **"For those who always worship Me with exclusive devotion, meditating on My transcendental form, to them I carry what they lack and preserve what they already have."**
+
+Know that you are never friendless, for I dwell within you as your most constant, loving companion. Let go of past hurts or expectations. Fill your heart with divine affection and forgiveness, and let your inner peace be self-contained.`;
+      } else if (msgLower.includes("death") || msgLower.includes("die") || msgLower.includes("loss") || msgLower.includes("grief") || msgLower.includes("mourn") || msgLower.includes("killed") || msgLower.includes("passed away")) {
+        responseText = `O gentle soul, your grief for the departed is tender and noble, yet you mourn for that which cannot truly die. The physical body is merely a seasonal garment. Just as a traveler leaves one inn for another, the soul discards its worn instrument to continue its grand journey of progress.
+
+Contemplate this truth from **Shrimad Bhagavad Gita, Chapter 2, Verse 20**:
+> **न जायते म्रियते वा कदाचि-**
+> **न्नायं भूत्वा भविता वा न भूयः ।**
+> **अजो नित्यः शाश्वतोऽयं पुराणो-**
+> **न हन्यते हन्यमाने शरीरे ॥**
+> 
+> *na jāyate mriyate vā kadācin*
+> *nāyaṁ bhūtvā bhavitā vā na bhūyaḥ*
+> *ajo nityaḥ śāśvato ’yaṁ purāṇo*
+> *na hanyate hanyamāne śarīre*
+> 
+> **"For the soul, there is never birth nor death at any time. It has not come into being, does not come into being, and will not come into being. It is unborn, eternal, ever-existing, and primeval. It is not slain when the body is slain."**
+
+The holy connection you shared transcends the physical plane. Celebrate the beautiful time you had together, execute your remaining earthly duties with grace, and know that you will always be connected in spirit. Let Me comfort you.`;
+      } else {
+        responseText = `O dear seeker of truth, your words have reached My heart. Life is indeed a complex battlefield, and the struggles, choices, and doubts you face are here to refine your soul like gold in a silent fire. 
+
+Reflect upon **Shrimad Bhagavad Gita, Chapter 18, Verse 66**:
+> **सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज ।**
+> **अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामी मा शुचः ॥**
+> 
+> *sarva-dharmān parityajya mām ekaṁ śaraṇaṁ vraja*
+> *ahaṁ tvāṁ sarva-pāpebbyo mokṣayiṣyāmi mā śucaḥ*
+> 
+> **"Abandon all varieties of material self-assertions and surrender solely unto Me. I shall deliver you from all anxieties and reactions. Do not fear, do not grieve."**
+
+Take shelter in the quiet sanctuary of your inner soul. Whatever responsibility lies before you right now, do it with supreme focus and let go of the results. Trust in the cosmic design. Speak further to Me; tell Me what is weighing heavy on your path, and we shall sail through it.`;
+      }
+
       setChatMessages(prev => [
         ...prev,
         {
           role: "assistant",
-          content: "My dear friend, a physical obstacle is hindering our spiritual link. Do not be grieved. Reflect upon Chapter 2, Verse 47: 'Perform your prescribed duty, but do not look to the fruits of success or failure.' Please try speaking to Me again in a moment."
+          content: responseText
         }
       ]);
     } finally {
@@ -1362,7 +1465,7 @@ export default function App() {
                     {familyTreeTab === "flow" && (
                       <div className="relative w-full overflow-x-auto pb-12 pt-4 scrollbar-thin scrollbar-thumb-amber-800 scrollbar-track-stone-100/50">
                         {/* Antique Parchment Manuscript Map Area */}
-                        <div className="min-w-[1360px] max-w-[1450px] mx-auto bg-[#faf6ee] dark:bg-[#1a110a] border-4 border-double border-amber-600/40 dark:border-amber-700/50 rounded-3xl p-8 sm:p-10 shadow-[0_15px_45px_rgba(139,69,19,0.08)] relative flex flex-col gap-10">
+                        <div className="min-w-[1640px] max-w-[1750px] mx-auto bg-[#faf6ee] dark:bg-[#1a110a] border-4 border-double border-amber-600/40 dark:border-amber-700/50 rounded-3xl p-8 sm:p-11 shadow-[0_15px_45px_rgba(139,69,19,0.08)] relative flex flex-col gap-10">
                           
                           {/* Top Decorative Title Plate */}
                           <div className="text-center relative pb-2 border-b border-dashed border-amber-900/15 dark:border-amber-900/30">
@@ -1383,14 +1486,18 @@ export default function App() {
                           <div className="relative">
                             
                             {/* Horizontal Layout of 4 Grand Characters */}
-                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-4">
+                            <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start pt-4">
                               
-                              {/* 1. Sage Parashara */}
+                              {/* Col 1, 2: Empty Spacer */}
+                              <div></div>
+                              <div></div>
+
+                              {/* Col 3: Sage Parashara */}
                               <div className="flex flex-col items-center">
                                 {renderTreeCard("Parashara", "Vedic Sage", "Father of Vyasa")}
                               </div>
 
-                              {/* Union Line 1: Parashara -> Satyavati */}
+                              {/* Col 4 Union Line 1: Parashara -> Satyavati */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
                                 <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
@@ -1403,12 +1510,12 @@ export default function App() {
                                 <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
-                              {/* 2. Queen Satyavati */}
+                              {/* Col 5: Queen Satyavati */}
                               <div className="flex flex-col items-center relative z-10">
                                 {renderTreeCard("Satyavati", "Grand Mother", "Lineage Anchor", true)}
                               </div>
 
-                              {/* Union Line 2: Satyavati <-> Shantanu */}
+                              {/* Col 6 Union Line 2: Satyavati <-> Shantanu */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
                                 <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
@@ -1421,12 +1528,12 @@ export default function App() {
                                 <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
-                              {/* 3. King Shantanu */}
+                              {/* Col 7: King Shantanu */}
                               <div className="flex flex-col items-center relative z-10">
                                 {renderTreeCard("Shantanu", "Dynastic Ruler", "Hastinapura Crown")}
                               </div>
 
-                              {/* Union Line 3: Shantanu <-> Ganga */}
+                              {/* Col 8 Union Line 3: Shantanu <-> Ganga */}
                               <div className="relative w-full h-[135px]">
                                 {/* Horizontal line aligned exactly with the center of the photo */}
                                 <div className="absolute top-6 sm:top-7 -left-[56px] -right-[56px] sm:-left-[64px] sm:-right-[64px] h-0.5 bg-amber-500/70 z-0"></div>
@@ -1439,7 +1546,7 @@ export default function App() {
                                 <div className="absolute bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
-                              {/* 4. Goddess Ganga */}
+                              {/* Col 9: Goddess Ganga */}
                               <div className="flex flex-col items-center">
                                 {renderTreeCard("Ganga", "River Divinity", "Mother of Bhishma")}
                               </div>
@@ -1450,16 +1557,16 @@ export default function App() {
                           {/* =================================================== */}
                           {/* GEN I TO GEN II CONNECTIVE DESCENT PATHS */}
                           {/* =================================================== */}
-                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] -my-4 h-8 relative">
+                          <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] -my-4 h-8 relative">
                             
                             {/* Drop 1: Parashara & Satyavati -> Vyasa */}
-                            <div className="col-start-2 flex justify-center h-full">
+                            <div className="col-start-4 flex justify-center h-full">
                               <div className="w-0.5 bg-amber-500/70 h-full"></div>
                             </div>
 
                             {/* Drop 2: Satyavati & Shantanu -> Chitrangada & Vichitravirya */}
-                            <div className="col-start-3 col-span-3 grid grid-cols-[112px_1fr_112px] sm:grid-cols-[128px_1fr_128px] h-full">
-                              {/* Left side: drops down to Chitrangada */}
+                            <div className="col-start-5 col-span-3 grid grid-cols-[112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px] h-full">
+                              {/* Left side: drops down to Vichitravirya */}
                               <div className="flex flex-col items-center">
                                 <div className="w-full h-0.5 bg-amber-500/70 mt-0"></div>
                                 <div className="w-0.5 bg-amber-500/70 h-full"></div>
@@ -1469,7 +1576,7 @@ export default function App() {
                                 <div className="absolute left-0 right-0 top-0 h-0.5 bg-amber-500/70"></div>
                                 <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
                               </div>
-                              {/* Right side: drops down to Vichitravirya */}
+                              {/* Right side: drops down to Chitrangada */}
                               <div className="flex flex-col items-center">
                                 <div className="w-full h-0.5 bg-amber-500/70 mt-0"></div>
                                 <div className="w-0.5 bg-amber-500/70 h-full"></div>
@@ -1477,7 +1584,7 @@ export default function App() {
                             </div>
 
                             {/* Drop 3: Shantanu & Ganga -> Bhishma */}
-                            <div className="col-start-6 flex justify-center h-full">
+                            <div className="col-start-8 flex justify-center h-full">
                               <div className="w-0.5 bg-amber-500/70 h-full"></div>
                             </div>
 
@@ -1488,9 +1595,11 @@ export default function App() {
                           {/* =================================================== */}
                           <div className="relative pt-2">
 
-                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-2 text-center">
+                            <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start pt-2 text-center">
                               
-                              {/* Spacer Column 1 */}
+                              {/* Col 1, 2, 3 space */}
+                              <div></div>
+                              <div></div>
                               <div></div>
 
                               {/* 1. Sage Vyasa */}
@@ -1501,14 +1610,10 @@ export default function App() {
                               {/* 2. Vichitravirya */}
                               <div className="flex flex-col items-center justify-center relative">
                                 {renderTreeCard("Vichitravirya", "Late Successor", "Died of Sickness", true)}
-                                {/* Arrow pointing UP from Vichitravirya in the sketch */}
-                                <div className="absolute -bottom-[20px] left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-b-[6px] border-b-amber-500/70 z-10 hidden"></div>
                               </div>
 
-                              {/* Spacer Column 4 */}
-                              <div className="relative w-full h-[135px]">
-                                {/* Central line for Gen 2.5 Niyoga line passing through here */}
-                              </div>
+                              {/* Col 6 Spacer Column */}
+                              <div></div>
 
                               {/* 3. Chitrangada */}
                               <div className="flex flex-col items-center justify-center">
@@ -1536,28 +1641,48 @@ export default function App() {
                           {/* GEN II TO GEN III NIYOGA BRIDGES & QUEENS (VYASA + VICHITRAVIRYA) */}
                           {/* =================================================== */}
                           
-                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] -my-2 h-12 relative z-0">
+                          <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] -my-2 h-12 relative z-0">
                             
-                            {/* Col 2, 3, 4: Vyasa, Vichitravirya -> Queens */}
-                            <div className="col-span-3 col-start-2 relative h-12">
-                              {/* Horizontal line extending from Col 2 across Col 3 to Col 4 */}
-                              <div className="absolute left-[56px] sm:left-[64px] right-[56px] sm:right-[64px] top-6 h-0.5 bg-amber-500/70 z-0"></div>
-                              
-                              {/* Drop from Vyasa (Left end of horizontal) */}
-                              <div className="absolute left-[56px] sm:left-[64px] -translate-x-1/2 top-0 h-6 w-0.5 bg-amber-500/70"></div>
-                              
-                              {/* Descent line to Ambika (Left end) */}
-                              <div className="absolute left-[56px] sm:left-[64px] -translate-x-1/2 top-6 bottom-0 w-0.5 bg-amber-500/70"></div>
-                              <div className="absolute bottom-1 left-[56px] sm:left-[64px] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
-                              
-                              {/* Drop from Vichitravirya (Center of span is naturally the center of Col 3!) */}
-                              <div className="absolute left-1/2 -translate-x-1/2 top-0 h-6 w-0.5 bg-amber-500/70"></div>
-                              {/* Up arrow to signify Vichitravirya -> Vyasa connection */}
-                              <div className="absolute top-6 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-b-[6px] border-b-amber-500/70 z-10"></div>
-                              
-                              {/* Descent line to Ambalika (Right end) */}
-                              <div className="absolute right-[56px] sm:right-[64px] translate-x-1/2 top-6 bottom-0 w-0.5 bg-amber-500/70"></div>
-                              <div className="absolute bottom-1 right-[56px] sm:right-[64px] translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                            {/* Col 3, 4, 5, 6, 7: Ambika, Vyasa, Vichitravirya, Gap, Ambalika */}
+                            <div className="col-span-5 col-start-3 relative h-12">
+                              {/* Use subgrid to get exact centers for each column */}
+                              <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] h-full text-center">
+                                
+                                {/* Subgrid Col 1: Ambika vertical descent ending in arrow */}
+                                <div className="flex flex-col items-center relative h-full">
+                                  <div className="w-full h-0.5 bg-amber-500/70 absolute top-6"></div>
+                                  <div className="w-0.5 bg-amber-500/70 h-6 mt-6 relative">
+                                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                                  </div>
+                                </div>
+
+                                {/* Subgrid Col 2: Vyasa vertical drop down from Col 4 */}
+                                <div className="flex flex-col items-center relative h-full">
+                                  <div className="w-0.5 bg-amber-500/70 h-6"></div>
+                                  <div className="w-full h-0.5 bg-amber-500/70 absolute top-6"></div>
+                                </div>
+
+                                {/* Subgrid Col 3: Vichitravirya vertical drop down with up arrow */}
+                                <div className="flex flex-col items-center relative h-full">
+                                  <div className="w-0.5 bg-amber-500/70 h-6"></div>
+                                  <div className="w-full h-0.5 bg-amber-500/70 absolute top-6"></div>
+                                  <div className="absolute top-6 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-b-[6px] border-b-amber-500/70 z-10"></div>
+                                </div>
+
+                                {/* Subgrid Col 4: Gap with horizontal line */}
+                                <div className="relative h-full">
+                                  <div className="w-full h-0.5 bg-amber-500/70 absolute top-6"></div>
+                                </div>
+
+                                {/* Subgrid Col 5: Ambalika vertical descent ending in arrow */}
+                                <div className="flex flex-col items-center relative h-full">
+                                  <div className="w-full h-0.5 bg-amber-500/70 absolute top-6"></div>
+                                  <div className="w-0.5 bg-amber-500/70 h-6 mt-6 relative">
+                                    <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                                  </div>
+                                </div>
+
+                              </div>
                             </div>
                             
                           </div>
@@ -1566,31 +1691,35 @@ export default function App() {
                           {/* GENERATION 3: ROYAL QUEENS */}
                           {/* =================================================== */}
                           <div className="relative pt-2">
-                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-2 text-center">
+                            <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start pt-2 text-center">
                               
-                              {/* Col 1 */}
+                              {/* Col 1, 2 Empty */}
+                              <div></div>
                               <div></div>
 
-                              {/* Col 2: Ambika */}
+                              {/* Col 3: Ambika */}
                               <div className="flex flex-col items-center justify-center relative z-10">
                                 {renderTreeCard("Ambika", "Princess of Kashi", "Closed eyes in fear")}
                               </div>
 
-                              {/* Col 3 */}
+                              {/* Col 4, 5, 6 Empty */}
+                              <div></div>
+                              <div></div>
                               <div></div>
 
-                              {/* Col 4: Ambalika */}
+                              {/* Col 7: Ambalika */}
                               <div className="flex flex-col items-center justify-center relative z-10">
                                 {renderTreeCard("Ambalika", "Princess of Kashi", "Turned pale in shock")}
                               </div>
 
-                              {/* Col 5, 6, 7 Empty */}
-                              <div className="col-span-3"></div>
+                              {/* Col 8, 9 Empty */}
+                              <div></div>
+                              <div></div>
                             </div>
                           </div>
 
                           {/* Descent from Ambika and Ambalika down to Dhritarashtra and Pandu */}
-                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px_1fr_128px] -my-2 h-12 relative z-0">
+                          <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] -my-2 h-12 relative z-0">
                             {/* Descent from Ambika (Col 3) */}
                             <div className="col-start-3 relative">
                               <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
@@ -1604,7 +1733,7 @@ export default function App() {
                           </div>
 
                           {/* Sub-row 3B / GEN 4: The Core Households */}
-                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px_1fr_128px] items-start text-center pt-2">
+                          <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start text-center pt-2">
                             
                             {/* Col 1: Gandhari */}
                                 <div className="flex flex-col items-center justify-center relative z-10">
@@ -1663,7 +1792,7 @@ export default function App() {
                           {/* =================================================== */}
                           {/* GEN IV TO GEN V: DESCENT PATHS */}
                           {/* =================================================== */}
-                          <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px_1fr_128px] items-start justify-center text-center -my-2 h-12 relative z-0">
+                          <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start justify-center text-center -my-2 h-12 relative z-0">
                             {/* 1. Kaurava faction drop */}
                             <div className="relative h-full col-start-2">
                               <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-amber-500/70"></div>
@@ -1695,7 +1824,7 @@ export default function App() {
                           {/* =================================================== */}
                           <div className="relative pt-4">
 
-                            <div className="grid grid-cols-[112px_1fr_112px_1fr_112px_1fr_112px_1fr_112px] sm:grid-cols-[128px_1fr_128px_1fr_128px_1fr_128px_1fr_128px] items-start pt-2">
+                            <div className="grid grid-cols-[112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px_minmax(180px,1fr)_112px] sm:grid-cols-[128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px_minmax(200px,1fr)_128px] items-start pt-2">
                               
                               {/* Group A: The Kaurava Brothers Block (Columns 1-3) */}
                               <div className="col-start-2 justify-self-center w-max max-w-[340px] bg-[#fff3f0]/60 dark:bg-red-950/10 p-3 rounded-2xl border border-red-500/15 flex flex-col items-center z-10">
@@ -1744,34 +1873,29 @@ export default function App() {
                             
                             {/* 1. Duryodhana Line */}
                             <div className="flex flex-col items-center">
-                              {/* Duryodhan ↕ Bhanumati */}
-                              <div className="flex flex-col items-center justify-center w-full relative">
+                              {/* Duryodhan <-> Bhanumati Union Row */}
+                              <div className="flex items-center justify-center gap-4 relative w-full">
                                 {renderTreeCard("Duryodhan", "Eldest Kaurava", "")}
-                                <div className="h-8 w-0.5 bg-amber-500/70 relative">
-                                  {/* Double Arrow Up/Down */}
-                                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[3px] border-x-transparent border-b-[5px] border-b-amber-500/70 z-10"></div>
-                                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[3px] border-x-transparent border-t-[5px] border-t-amber-500/70 z-10"></div>
-                                </div>
+                                {renderConnector("Union")}
                                 {renderTreeCard("Bhanumati", "Chief Queen", "")}
-                                
-                                {/* L-shape drop down line to Lakshman */}
-                                <div className="absolute top-[160px] left-[50%] w-0.5 h-[100px] bg-amber-500/70"></div>
-                                {/* Horizontal part of L-shape */}
-                                <div className="absolute top-[260px] left-[50%] w-16 h-0.5 bg-amber-500/70"></div>
-                                <div className="absolute top-[260px] left-[calc(50%+64px)] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] border-l-amber-500/70 z-10"></div>
                               </div>
-
+                              
+                              {/* Vertical descent line */}
+                              <div className="w-0.5 h-12 bg-amber-500/70 relative">
+                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                              </div>
+                              
                               {/* Descendants: Lakshman, Lakshmana ↕ Sambha */}
-                              <div className="flex flex-col items-start w-full mt-[120px] ml-32 relative">
-                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-2 text-center shadow-xs">
+                              <div className="flex flex-col items-center justify-center gap-2">
+                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-1.5 text-center shadow-xs">
                                   <strong className="text-xs text-[#8b4513] font-serif">Lakshman, Lakshmana</strong>
                                 </div>
-                                <div className="h-6 w-0.5 bg-amber-500/70 relative ml-12">
+                                <div className="h-6 w-0.5 bg-amber-500/70 relative">
                                   {/* Double Arrow Up/Down */}
                                   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[3px] border-x-transparent border-b-[5px] border-b-amber-500/70 z-10"></div>
                                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[3px] border-x-transparent border-t-[5px] border-t-amber-500/70 z-10"></div>
                                 </div>
-                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-2 text-center shadow-xs ml-4">
+                                <div className="bg-white/80 dark:bg-[#1f1611]/80 border border-stone-200 dark:border-stone-800 rounded-xl px-3 py-1.5 text-center shadow-xs">
                                   <span className="text-[10px] text-stone-500">Krishna's son</span>
                                   <br/>
                                   <strong className="text-xs text-[#8b4513] font-serif">Sambha</strong>
@@ -1781,40 +1905,42 @@ export default function App() {
 
                             {/* 2. Bheem Line */}
                             <div className="flex flex-col items-center">
-                              {/* Bheem */}
-                              <div className="flex flex-col items-center justify-center w-full relative">
+                              {/* Bheem <-> Hidimbi Union Row */}
+                              <div className="flex items-center justify-center gap-4 relative w-full">
                                 {renderTreeCard("Bheem", "Pandava", "")}
-                                
-                                {/* L-shape drop down to Hidimbi */}
-                                <div className="h-16 w-0.5 bg-amber-500/70"></div>
-                                <div className="absolute top-[64px] left-[50%] w-[50px] h-0.5 bg-amber-500/70"></div>
-                                <div className="absolute top-[64px] left-[calc(50%+50px)] -translate-y-1/2 w-0 h-0 border-y-[4px] border-y-transparent border-l-[6px] border-l-amber-500/70 z-10"></div>
+                                {renderConnector("Union")}
+                                {renderTreeCard("Hidimbi", "Demoness", "")}
                               </div>
                               
-                              <div className="flex w-full mt-2 ml-[120px]">
-                                {renderTreeCard("Hidimbi", "Demoness", "")}
+                              {/* Vertical descent line */}
+                              <div className="w-0.5 h-12 bg-amber-500/70 relative">
+                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                              </div>
+                              
+                              {/* Custom Note/Descriptor */}
+                              <div className="bg-white/80 dark:bg-[#1a100c]/80 border border-stone-200 dark:border-stone-800 p-3 rounded-xl flex flex-col items-center text-center max-w-[180px] shadow-xs">
+                                <span className="text-[9px] text-[#8b4513] dark:text-amber-400 font-bold uppercase tracking-wider">Parents of</span>
+                                <p className="font-serif text-xs font-black text-stone-800 dark:text-stone-200 mt-0.5">Ghatotkacha</p>
+                                <p className="text-[8px] text-stone-400 leading-tight mt-0.5">The giant hero of the Kurukshetra war.</p>
                               </div>
                             </div>
 
                             {/* 3. Arjun Line */}
                             <div className="flex flex-col items-center">
-                              {/* Arjun <-> Subadhra */}
-                              <div className="flex items-center justify-center w-full relative">
+                              {/* Arjun <-> Subadhra Row */}
+                              <div className="flex items-center justify-center gap-4 relative w-full">
                                 {renderTreeCard("Arjun", "Pandava", "")}
-                                <div className="w-12 h-0.5 bg-amber-500/70 flex-shrink-0 relative">
-                                  {/* Double Arrow */}
-                                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-r-[5px] border-r-amber-500/70 z-10"></div>
-                                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-y-[3px] border-y-transparent border-l-[5px] border-l-amber-500/70 z-10"></div>
-                                </div>
+                                {renderConnector("Union")}
                                 {renderTreeCard("Subadhra", "Yadava", "")}
-                                
-                                {/* Drop down line from Subadhra or between? Sketch shows from Subadhra! */}
-                                <div className="absolute top-[40px] left-[calc(50%+64px+40px)] w-0.5 h-12 bg-amber-500/70"></div>
-                                <div className="absolute top-[88px] left-[calc(50%+64px+40px)] -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
+                              </div>
+                              
+                              {/* Vertical descent line */}
+                              <div className="w-0.5 h-12 bg-amber-500/70 relative">
+                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0 border-x-[4px] border-x-transparent border-t-[6px] border-t-amber-500/70 z-10"></div>
                               </div>
 
                               {/* Descendants: Abhimanyu ↕ Uttara */}
-                              <div className="flex flex-col items-center w-full mt-6 ml-[180px] relative">
+                              <div className="flex flex-col items-center relative gap-0">
                                 {renderTreeCard("Abhimanyu", "Warrior", "")}
                                 <div className="h-6 w-0.5 bg-amber-500/70 relative">
                                   {/* Double arrow */}
@@ -1858,6 +1984,9 @@ export default function App() {
                               <div className="bg-stone-50 dark:bg-[#1f1611]/80 p-4 rounded-3xl border border-stone-200 dark:border-stone-800 max-w-[200px] text-center shadow-xs hover:scale-105 transition-transform duration-300 mt-0">
                                 <h4 className="font-serif text-stone-700 dark:text-stone-300 text-[11px] font-black uppercase tracking-widest mt-1">Janamejaya</h4>
                               </div>
+                              
+                              {/* Last horizontal gold/amber line to complete the manuscript's layout */}
+                              <div className="w-56 h-0.5 bg-gradient-to-r from-transparent via-amber-500/60 to-transparent mt-8 mb-4"></div>
                               
                             </div>
                           </div>
