@@ -265,6 +265,7 @@ export default function App() {
   const [chatMessages, setChatMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([]);
   const [chatInput, setChatInput] = useState<string>("");
   const [chatLoading, setChatLoading] = useState<boolean>(false);
+  const [isStreaming, setIsStreaming] = useState<boolean>(false);
 
   // Listen to Firebase Auth state
   useEffect(() => {
@@ -558,6 +559,7 @@ export default function App() {
     const updatedMessages = [...chatMessages, userMsg];
     setChatMessages(updatedMessages);
     setChatLoading(true);
+    setIsStreaming(true);
 
     try {
       const apiUrl = getApiUrl("/api/chat");
@@ -576,21 +578,62 @@ export default function App() {
         throw new Error("Krishna AI request failed");
       }
 
-      const data = await res.json();
-      const content = data.choices[0].message.content;
-      setChatMessages(prev => [...prev, { role: "assistant", content }]);
+      // Add placeholder message for assistant and turn off first-stage spinner
+      setChatMessages(prev => [...prev, { role: "assistant", content: "" }]);
+      setChatLoading(false);
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder("utf-8");
+
+      if (!reader) {
+        throw new Error("No readable stream reader available on response");
+      }
+
+      let accumulatedContent = "";
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value, { stream: true });
+        accumulatedContent += chunk;
+
+        setChatMessages(prev => {
+          const nextMsgs = [...prev];
+          const lastIndex = nextMsgs.length - 1;
+          if (lastIndex >= 0 && nextMsgs[lastIndex].role === "assistant") {
+            nextMsgs[lastIndex] = { role: "assistant", content: accumulatedContent };
+          }
+          return nextMsgs;
+        });
+      }
     } catch (err) {
       console.error("Krishna AI Error:", err);
       
-      setChatMessages(prev => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "I am unable to speak right now as My divine portal is temporarily offline or experiencing connection issues. O seeker, please verify that your `NVIDIA_API_KEY` is correctly set in your AI Studio environment settings, and try again in an instant."
+      setChatMessages(prev => {
+        const nextMsgs = [...prev];
+        const lastIndex = nextMsgs.length - 1;
+        if (lastIndex >= 0 && nextMsgs[lastIndex].role === "assistant") {
+          const currentContent = nextMsgs[lastIndex].content;
+          nextMsgs[lastIndex] = {
+            role: "assistant",
+            content: currentContent 
+              ? currentContent + "\n\n*(The divine connection was interrupted.)*"
+              : "My dear seeker, I am unable to connect with your seeking soul at this moment due to a temporary connection lapse. Please raise your query again, and let us steady our minds."
+          };
+          return nextMsgs;
+        } else {
+          return [
+            ...prev,
+            {
+              role: "assistant",
+              content: "My dear seeker, I am unable to connect with your seeking soul at this moment due to a temporary connection lapse. Please raise your query again, and let us steady our minds."
+            }
+          ];
         }
-      ]);
+      });
     } finally {
       setChatLoading(false);
+      setIsStreaming(false);
     }
   };
 
@@ -3102,7 +3145,12 @@ export default function App() {
                               : "bg-white dark:bg-[#2c1b12]/50 text-stone-800 dark:text-stone-100 border border-amber-200/50 dark:border-amber-900/30 rounded-bl-none max-w-[85%] shadow-2xs whitespace-pre-line"
                           }`}
                         >
-                          {msg.role === "user" ? msg.content : <Translate text={msg.content} typewrite={index === chatMessages.length - 1} />}
+                          {msg.role === "user" 
+                            ? msg.content 
+                            : (index === chatMessages.length - 1 && isStreaming 
+                                ? msg.content 
+                                : <Translate text={msg.content} />
+                              )}
                         </div>
                         <span className="text-[9px] text-stone-400 dark:text-stone-500 mt-1 px-1 font-serif">
                           {msg.role === "user" ? <Translate text="You (Seeker)" /> : <Translate text="Lord Krishna" />}

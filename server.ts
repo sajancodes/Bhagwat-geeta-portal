@@ -273,7 +273,7 @@ ${text}`;
     }
   });
 
-  // Proxy Chat completions
+  // Proxy Chat completions (with real-time streaming)
   app.post("/api/chat", async (req: express.Request, res: express.Response) => {
     try {
       const { messages } = req.body;
@@ -293,112 +293,67 @@ Guidelines for your divine response:
 4. You MUST cite or reference at least one relevant verse/shlok from Shrimad Bhagavad Gita (e.g., Chapter 2 Vardhana / Verse 47, Chapter 6 Verse 5, Chapter 18 Verse 66, etc.) and explain its message as it applies to their specific query.
 5. Remind them of their duties (Svadharma), right action without fruits (Nishkama Karma), and steadying the turbulent mind. Assure them that they are never alone, that you reside in their very heart, and that they will overcome this temporary illusion.`;
 
-      // Live NVIDIA Generative AI Core integration (OpenAI compatible NIM endpoint)
-      const apiKey = process.env.NVIDIA_API_KEY;
-      if (apiKey) {
-        try {
-          const formattedMessages = messages
-            .filter((m: any) => m.role === "user" || m.role === "assistant")
-            .map((m: any) => ({
-              role: m.role,
-              content: m.content
-            }));
-
-          const response = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-              model: "meta/llama-3.1-70b-instruct",
-              messages: [
-                { role: "system", content: systemPrompt },
-                ...formattedMessages
-              ],
-              temperature: 0.7,
-              max_tokens: 2048
-            })
-          });
-
-          if (response.ok) {
-            const data = await response.json() as any;
-            if (data && data.choices && data.choices[0] && data.choices[0].message) {
-              res.json({
-                choices: [
-                  {
-                    message: {
-                      content: data.choices[0].message.content
-                    }
-                  }
-                ]
-              });
-              return;
-            }
-          } else {
-            const errBody = await response.text();
-            console.error(`NVIDIA API response error status: ${response.status} - ${errBody}`);
-          }
-        } catch (apiError: any) {
-          console.error("NVIDIA API call failed:", apiError);
-        }
-      }
-
-      // Hybrid self-healing fallback to standard server-side Google Gemini SDK
       const geminiKey = process.env.GEMINI_API_KEY;
-      if (geminiKey) {
-        try {
-          const { GoogleGenAI } = await import("@google/genai");
-          const ai = new GoogleGenAI({ apiKey: geminiKey });
-          
-          // Format conversation history nicely for the model
-          const messageHistory = messages
-            .filter((m: any) => m.role === "user" || m.role === "assistant")
-            .map((m: any) => `${m.role === "user" ? "Seeker (User)" : "Lord Krishna (AI)"}: ${m.content}`)
-            .join("\n\n");
-
-          const promptText = `Divine Instructions for your character Roleplay:\n${systemPrompt}\n\nExisting dialogue history between seeker and you:\n${messageHistory}\n\nSpeak now as Lord Krishna, and deliver your new loving response directly addressing the last query. Do not add metadata, tags, or narrator stage directions. Just write your spoken advice:`;
-
-          const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: promptText,
-            config: {
-              temperature: 0.7,
-              maxOutputTokens: 2048,
-            }
-          });
-
-          const content = response.text;
-          if (content) {
-            res.json({
-              choices: [
-                {
-                  message: {
-                    content: content
-                  }
-                }
-              ]
-            });
-            return;
-          }
-        } catch (geminiError: any) {
-          console.error("Gemini fallback API call failed:", geminiError);
-        }
+      if (!geminiKey) {
+        res.setHeader("Content-Type", "text/plain; charset=utf-8");
+        res.write("My dear seeker, the divine channels are silent at this moment. Let us pause, quieten our thoughts, and seek guidance again shortly.");
+        res.end();
+        return;
       }
 
-      // Clean, professional notice if neither API is configured or fails, instead of deceptive canned text
-      res.json({
-        choices: [
-          {
-            message: {
-              content: "I am unable to speak right now as My divine portal is missing its validation key. O diligent seeker, please configure either your `NVIDIA_API_KEY` or `GEMINI_API_KEY` in the Environment Secrets menu on Google AI Studio to unlock live, real-time spiritual advice directly from Lord Krishna's AI."
-            }
+      const { GoogleGenAI } = await import("@google/genai");
+      const ai = new GoogleGenAI({ 
+        apiKey: geminiKey,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build'
           }
-        ]
+        }
       });
+      
+      // Format conversation history nicely for the model
+      const messageHistory = messages
+        .filter((m: any) => m.role === "user" || m.role === "assistant")
+        .map((m: any) => `${m.role === "user" ? "Seeker (User)" : "Lord Krishna (AI)"}: ${m.content}`)
+        .join("\n\n");
+
+      const promptText = `Divine Instructions for your character Roleplay:\n${systemPrompt}\n\nExisting dialogue history between seeker and you:\n${messageHistory}\n\nSpeak now as Lord Krishna, and deliver your new loving response directly addressing the last query. Do not add metadata, tags, or narrator stage directions. Just write your spoken advice:`;
+
+      // Set headers for streaming text raw to client
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.setHeader("Transfer-Encoding", "chunked");
+      res.setHeader("Cache-Control", "no-cache");
+      res.setHeader("Connection", "keep-alive");
+
+      try {
+        const streamResponse = await ai.models.generateContentStream({
+          model: "gemini-3.5-flash",
+          contents: promptText,
+          config: {
+            temperature: 0.7,
+            maxOutputTokens: 2048,
+          }
+        });
+
+        for await (const chunk of streamResponse) {
+          const text = chunk.text;
+          if (text) {
+            res.write(text);
+          }
+        }
+        res.end();
+      } catch (streamError) {
+        console.error("Gemini stream error:", streamError);
+        res.write("\n*(O seeker, a ripple in the ether has interrupted our connection. Please try again.)*");
+        res.end();
+      }
     } catch (error: any) {
       console.error("Express /api/chat error:", error);
-      res.status(500).json({ error: "Internal Server Error", details: error.message });
+      if (!res.headersSent) {
+        res.status(500).json({ error: "Internal Server Error", details: error.message });
+      } else {
+        res.end();
+      }
     }
   });
 

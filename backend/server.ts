@@ -272,7 +272,7 @@ ${text}`;
   }
 });
 
-// Krishna Chat AI Counselling Endpoint
+// Krishna Chat AI Counselling Endpoint (with real-time streaming)
 app.post("/api/chat", async (req, res) => {
   try {
     const { messages } = req.body;
@@ -291,104 +291,66 @@ Guidelines for your response:
 4. You MUST cite or reference at least one relevant verse/shlok from Shrimad Bhagavad Gita (e.g., Chapter 2's Lordly message / Verse 47, Chapter 6 Verse 5, Chapter 18 Verse 66, etc.) and explain its message as it applies to their specific query.
 5. Remind them of their duties (Svadharma), right action without fruits (Nishkama Karma), and steadying the turbulent mind. Assure them that they are never alone, that you reside in their very heart, and that they will overcome this temporary illusion.`;
 
-    const apiKey = process.env.NVIDIA_API_KEY;
-    if (apiKey) {
-      try {
-        const formattedMessages = messages
-          .filter((m: any) => m.role === "user" || m.role === "assistant")
-          .map((m: any) => ({
-            role: m.role,
-            content: m.content
-          }));
-
-        const response = await fetch("https://integrate.api.nvidia.com/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${apiKey}`
-          },
-          body: JSON.stringify({
-            model: "meta/llama-3.1-70b-instruct",
-            messages: [
-              { role: "system", content: systemPrompt },
-              ...formattedMessages
-            ],
-            temperature: 0.7,
-            max_tokens: 2048
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json() as any;
-          if (data && data.choices && data.choices[0] && data.choices[0].message) {
-            res.json({
-              choices: [
-                {
-                  message: {
-                    content: data.choices[0].message.content
-                  }
-                }
-              ]
-            });
-            return;
-          }
-        }
-      } catch (apiError: any) {
-        console.error("NVIDIA API call failed in standalone:", apiError);
-      }
-    }
-
     const geminiKey = process.env.GEMINI_API_KEY;
-    if (geminiKey) {
-      try {
-        const { GoogleGenAI } = await import("@google/genai");
-        const ai = new GoogleGenAI({ apiKey: geminiKey });
-        
-        const messageHistory = messages
-          .filter((m: any) => m.role === "user" || m.role === "assistant")
-          .map((m: any) => `${m.role === "user" ? "Seeker" : "Lord Krishna"}: ${m.content}`)
-          .join("\n\n");
-
-        const promptText = `Divine Instructions for your character Roleplay:\n${systemPrompt}\n\nExisting dialogue history:\n${messageHistory}\n\nDeliver your divine guidance directly addressing the last query as Lord Krishna:`;
-
-        const response = await ai.models.generateContent({
-          model: "gemini-2.5-flash",
-          contents: promptText,
-          config: {
-            temperature: 0.7,
-            maxOutputTokens: 2048,
-          }
-        });
-
-        const content = response.text;
-        if (content) {
-          res.json({
-            choices: [
-              {
-                message: {
-                  content: content
-                }
-              }
-            ]
-          });
-          return;
-        }
-      } catch (geminiError) {
-        console.error("Fallback Gemini compilation failed in standalone:", geminiError);
-      }
+    if (!geminiKey) {
+      res.setHeader("Content-Type", "text/plain; charset=utf-8");
+      res.write("My dear seeker, the divine channels are silent at this moment. Let us pause, quieten our thoughts, and seek guidance again shortly.");
+      res.end();
+      return;
     }
 
-    res.json({
-      choices: [
-        {
-          message: {
-            content: "O seeker, my words are momentarily silent as my validation keys are missing. Please ensure GEMINI_API_KEY or NVIDIA_API_KEY is configured correctly in the Render Environment Variables setup."
-          }
+    const { GoogleGenAI } = await import("@google/genai");
+    const ai = new GoogleGenAI({ 
+      apiKey: geminiKey,
+      httpOptions: {
+        headers: {
+          'User-Agent': 'aistudio-build'
         }
-      ]
+      }
     });
+    
+    const messageHistory = messages
+      .filter((m: any) => m.role === "user" || m.role === "assistant")
+      .map((m: any) => `${m.role === "user" ? "Seeker" : "Lord Krishna"}: ${m.content}`)
+      .join("\n\n");
+
+    const promptText = `Divine Instructions for your character Roleplay:\n${systemPrompt}\n\nExisting dialogue history:\n${messageHistory}\n\nDeliver your divine guidance directly addressing the last query as Lord Krishna:`;
+
+    // Set headers for streaming text raw to client
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Transfer-Encoding", "chunked");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
+
+    try {
+      const streamResponse = await ai.models.generateContentStream({
+        model: "gemini-3.5-flash",
+        contents: promptText,
+        config: {
+          temperature: 0.7,
+          maxOutputTokens: 2048,
+        }
+      });
+
+      for await (const chunk of streamResponse) {
+        const text = chunk.text;
+        if (text) {
+          res.write(text);
+        }
+      }
+      res.end();
+    } catch (streamError) {
+      console.error("Gemini stream error in standalone:", streamError);
+      res.write("\n*(O seeker, a ripple in the ether has interrupted our connection. Please try again.)*");
+      res.end();
+    }
   } catch (error: any) {
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    console.error("Express /api/chat error in standalone:", error);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Internal Server Error", details: error.message });
+    } else {
+      res.end();
+    }
   }
 });
 
